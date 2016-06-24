@@ -1,0 +1,135 @@
+﻿
+
+#Use break-points to enshure that ever branch of code is traversed.
+
+
+
+Add code to test array resizing.
+It may be prudent to create tests for the Node clases as well.
+Lists could improve the insertion of multiple items at once, but it's probably best left allown.
+
+
+
+It might be prudent to allow the player to deside how a sorted list should store duplicates.
+Weather they should apear before or after all similar items. If you are using this to implement
+a priority queue, this can make the diffrence between LIFO and FIFO order. It's unclear what this
+might mean for trees, however.
+
+You might want the player to be able to find the first index, or last index of a duplicate item
+in a sorted list, rather than just leaving this to be 'non-deterministic'.
+
+
+The best way to handel tree itteration, is to have TreeOrder be a setable property of the tree.
+If you have several properties, for each type of TreeOrder, each returning a IEnumerable,
+things are bound to get quite complicated, and it dosen't help all that mutch. Most of the
+time you would want a tree to be InOrder, and having to change one property before doing
+an alternate (infrequent) itteration, is not too mutch to ask. Also, trees that searve a
+special purpous, might save time by always being itterated in the same way.
+
+
+Possable ways to implement RB nodes:
+	Store the data in the Binary Nodes - not everything needs this data
+	Create a subclass of Binary Node - have to cast to get to the data
+	Create a Data Item pair - more nesting of objects within objects
+
+Creating a subclass of Binary Node:
+	The subclass has only one new item
+	It cannot be included as an inner class
+	It dosen't look very good
+	The end user might could access the data
+
+Create a Data Item pair:
+	Is an extra wrapper item
+	Dosent work with claaws expecting Node<E> not Node<Data<E>>
+	Can actualy look good
+
+Storing the data in Binary Node Directly:
+	Feels like something tacked on
+	Some (if not most) uses of Binary Node won't need it
+	Is the simplest solution
+
+
+
+
+*Have a Deque and a Heep inside the Queues folder
+*A deque can effecently be used as both a stack and a queue, so no need for either of them
+*In both you can eaisly undo whatever option you just did, so there is litle need for peek
+*A Heep is obviously diffrent from a search tree, even if it has a tree like structur
+
+Consider the ability to set the capacity when instanciating an array-based colleciton that
+already contains some objects, or perhaps the ability to even change the base capacity
+at run time.
+
+*consider changing the base-capacity parameter on constructors so that it will atomaticaly
+*elsect the lowest possable capacity, if the capacity is wrong, instead of throwing an exception.
+
+
+It should be possable to create both a Contains(key) method and Retreve(key) method that would
+work for all Dictionary type data structors, however Retreve(key) would return indeterminat
+values for anything that allows duplicate keys.
+
+Use the term Overwrite instead of SetValue for Tables.
+
+
+
+Insert - Throws an exception if the key is already there
+
+Overwrite - Throws an exception if the key is not there
+
+InsertOver - Searches for the key:
+	Preforms an overwrite if the key is found
+	Preforms an insert if the key is not found
+
+Retreve - Returns null if a value cannot be found
+
+Delete - Returns null if a value cannot be found
+
+
+
+
+- Do we relly need heep? - Trees offer O(log(n)) insertion and removal, just the same as a heep.
+A tree can removoe items from both ends, where a heep must either be a min-heep or a max-heep.
+Trees can be itterated in any of 4 diffrent ways, a heep can only effecntly be itterated in level
+order. A heep only uses a single array, where a tree contains nodes and possably balancing data.
+
+
+- I think the best option is to use Splay Trees for the closed-address tables, and forget about
+the circular lists. For one thing, Splay Trees are at least as fast as circular lists (In the
+worst case they form a linked list themselves). And they also provide the same temporal locality
+as linked lists. Therefore the latter totaly subsumes the former.
+
+
+
+Checking for inbalanced closed-address tables, dosent work. By the time you can detect that
+is should be re-balanced, it's already in a pretty bad state.
+
+We need determin a resizing scheem for making hash tables smaller when deleting; 
+for both open and closed address hashing.
+
+
+Questions?
+
+- For closed address hashing, should I use only lists for the buckets, or only trees, or both? LISTS
+- For closed address hashing, should the maximum load factor (for resising) be a constant? YES
+- Should I create hash tables as simple collecitons, without the need for key-value pairs? NO
+
+Consider the operations: HasPair(key, item)
+
+
+- Trees should use a comparison delegate, just like sorted lists.
+- Consider adjusting the comparison methods, so that they can compare nulls.
+- You can implement a heep directly as a priority queue, as it won't likely be used anywhere else.
+
+
+- Everything is what we make of it.
+- We only care about the key's when operating our dictibonary type sturctors, so we don't need
+both keys and values (in test data) to test them, we can just double up the key instead.
+
+What's Left:
+
+- Implementing PriQue and it's various implementations, including PriQueHeep
+- Implementing Map and it's various implementations.
+- It would be good for a MapHash to store the items in random order within each bucket,
+that way, the number of matching items should be roughly evenly distributed.
+- Sorting and Shuffeling Options (and Random Number Generation).
+- Add a comparison delegate to Tree and it's sub classes.

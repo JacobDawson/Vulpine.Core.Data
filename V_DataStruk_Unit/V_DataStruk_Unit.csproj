@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4EC8ED6A-D423-422A-A1DD-B95854ED594D}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Vulpine_Core_Data_Tests</RootNamespace>
+    <AssemblyName>V_DataStruk_Unit</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Vulpine_Core_Data_Tests.Program</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="nunit.framework, Version=2.6.2.12296, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\NUnit 2.6.2\bin\framework\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Unit\Dictionaries\DictionaryTests.cs" />
+    <Compile Include="Unit\Dictionaries\HeepArrayTests.cs" />
+    <Compile Include="Unit\Dictionaries\HeepTests.cs" />
+    <Compile Include="Unit\Dictionaries\HeepTreeTests.cs" />
+    <Compile Include="Unit\Dictionaries\TableClosedTests.cs" />
+    <Compile Include="Unit\Dictionaries\TableSingleTests.cs" />
+    <Compile Include="Unit\Dictionaries\TableTests.cs" />
+    <Compile Include="Unit\Collections\CollectionTests.cs" />
+    <Compile Include="Unit\Collections\DequeArrayTests.cs" />
+    <Compile Include="Unit\Collections\DequeLinkedTests.cs" />
+    <Compile Include="Unit\Collections\DequeTests.cs" />
+    <Compile Include="Unit\Others\IndexTests.cs" />
+    <Compile Include="Unit\Collections\ListArrayTests.cs" />
+    <Compile Include="Unit\Collections\ListLinkedTests.cs" />
+    <Compile Include="Unit\Collections\ListTests.cs" />
+    <Compile Include="Unit\Others\NodeBinaryTests.cs" />
+    <Compile Include="Unit\Others\NodeLiniarTests.cs" />
+    <Compile Include="Unit\Collections\SortListArrayTests.cs" />
+    <Compile Include="Unit\Collections\SortListLinkedTests.cs" />
+    <Compile Include="Unit\Collections\SortListTests.cs" />
+    <Compile Include="Unit\Dictionaries\TableOpenTests.cs" />
+    <Compile Include="Unit\Collections\TreeBasicTests.cs" />
+    <Compile Include="Unit\Collections\TreeRedBlackTests.cs" />
+    <Compile Include="Unit\Collections\TreeSplayTests.cs" />
+    <Compile Include="Unit\Collections\TreeTests.cs" />
+    <Compile Include="Unit\Others\PrimeTests.cs" />
+    <Compile Include="Unit\TestBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\NUnit_Unofficial\NUnit_Unofficial\NUnit_Unofficial.csproj">
+      <Project>{8379E588-F5E8-4F0B-B68A-AD492652472F}</Project>
+      <Name>NUnit_Unofficial</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\V_DataStruk\V_DataStruk.csproj">
+      <Project>{C2C84BBA-4CBD-4DA1-9E1E-F9C964196206}</Project>
+      <Name>V_DataStruk</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Notes.txt" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
