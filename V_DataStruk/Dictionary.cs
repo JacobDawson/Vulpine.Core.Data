@@ -4,19 +4,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+//spell-checked
+
 namespace Vulpine.Core.Data
 {
     /// <summary>
     /// This abstract class provides the basic functionality of all dictionary-type
-    /// data structors in the core library. A ditionary is a group of two distinct
+    /// data structures in the core library. A dictionary is a group of two distinct
     /// types of items, keys and values, where the keys share some sort of relational
     /// property with the values. Neither NULL Keys or values may be stored in a
-    /// dictionary, as the value NULL may carry other conotations. It differs greatly
-    /// from the IDictionary interface, which more closly resembles the Table class. 
+    /// dictionary, as the value NULL may carry other connotations. It differs greatly
+    /// from the IDictionary interface, which more closely resembles the Table class. 
     /// Most importantly, it is insertion-only, it dose not allow removal of any kind. 
-    /// Derived classes may implement their own specialised remove methods, however. 
-    /// Although it implements the ICollection interface, this is done primarly to 
-    /// suport LINQ operations, which run more effecently when the sequence being 
+    /// Derived classes may implement their own specialized remove methods, however. 
+    /// Although it implements the ICollection interface, this is done primary to 
+    /// support LINQ operations, which run more efficiently when the sequence being 
     /// processed implements ICollection. 
     /// </summary>
     /// <typeparam name="K">Key type of the dictionary</typeparam>
@@ -33,7 +35,7 @@ namespace Vulpine.Core.Data
         public abstract int Count { get; }
 
         /// <summary>
-        /// Determins if the dictionary is empty or contains items. It is
+        /// Determines if the dictionary is empty or contains items. It is
         /// set to true if empty and false if otherwise.
         /// </summary>
         public virtual bool Empty
@@ -42,7 +44,7 @@ namespace Vulpine.Core.Data
         }
 
         /// <summary>
-        /// Determins if the dictionary requires all keys to be unique.
+        /// Determines if the dictionary requires all keys to be unique.
         /// If so, items with duplicate keys cannot be inserted. By default
         /// duplicate keys are allowed.
         /// </summary>
@@ -52,8 +54,8 @@ namespace Vulpine.Core.Data
         }
 
         /// <summary>
-        /// Determins if the dictionary only allows read access. By default 
-        /// data structors allow both read and wright access.
+        /// Determines if the dictionary only allows read access. By default 
+        /// data structures allow both read and wright access.
         /// </summary>
         public virtual bool IsReadOnly
         {
@@ -65,7 +67,7 @@ namespace Vulpine.Core.Data
         #region Default Operations...
 
         /// <summary>
-        /// Determins if a paticular key is contained in this dictionary.
+        /// Determines if a particular key is contained in this dictionary.
         /// It returns true if the key exists, and false otherwise.
         /// </summary>
         /// <param name="key">Key to test</param>
@@ -85,14 +87,14 @@ namespace Vulpine.Core.Data
 
         /// <summary>
         /// Removes all items from the dictionary, causing the dictionary
-        /// to revert to it's original initialised state.
+        /// to revert to it's original initialized state.
         /// </summary>
         public abstract void Clear();
 
         /// <summary>
         /// Creates an enumeration over all the keys and values in the
         /// dictionary, together as keyed items. If you need something
-        /// more spesific, consider ListKeys() or ListItems().
+        /// more specific, consider ListKeys() or ListItems().
         /// </summary>
         /// <returns>An enumeration of keyed items</returns>
         public abstract IEnumerator<KeyedItem<K, E>> GetEnumerator();
@@ -123,18 +125,18 @@ namespace Vulpine.Core.Data
 
         /// <summary>
         /// Copies the key-value pairs of the dictionary into an array with a given
-        /// offset. This is implemented primarly in suport of the ICollection
+        /// offset. This is implemented primarily in support of the ICollection
         /// interface, for which it is required.
         /// </summary>
         /// <param name="array">The array in which to place the items</param>
-        /// <param name="offset">The offest index into the array</param>
+        /// <param name="offset">The offset index into the array</param>
         /// <exception cref="ArgumentNullException">If the array is null</exception>
         /// <exception cref="ArgumentOutOfRangeException">If the offset is less
         /// than zero, or dose not leave enough room for the dictionary to fit
         /// into the rest of the array</exception>
         public virtual void CopyTo(KeyedItem<K, E>[] array, int offset)
         {
-            //checks that the colleciton will fit into the array
+            //checks that the collection will fit into the array
             if (array == null) throw new ArgumentNullException("array");
             if (offset < 0 || offset > array.Length - Count)
                 throw new ArgumentOutOfRangeException("offset");

@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+//spell-checked
+
 namespace Vulpine.Core.Data.Tables
 {
     /// <summary>
-    /// A Table, also known as an associtive array, is an advanced data structor
-    /// that refrences its contents by associating each item with a paticular key.
-    /// To look up a given item in the table only it's key needs to be known. Usualy
-    /// this is a very effecent operation. A table can also be thought of as a function
+    /// A Table, also known as an associative array, is an advanced data structure
+    /// that references its contents by associating each item with a particular key.
+    /// To look up a given item in the table only it's key needs to be known. Usually
+    /// this is a very efficient operation. A table can also be thought of as a function
     /// which maps keys to values. Each key inside the table maps to a single value,
     /// however the same value may have multiple keys. For this reason, it is not
-    /// permissable to insert duplicate keys into a table. Otherwise you would have
-    /// a single key poiting to more than one value, which is not allowed.
+    /// permissible to insert duplicate keys into a table. Otherwise you would have
+    /// a single key pointing to more than one value, which is not allowed.
     /// </summary>
     /// <typeparam name="K">Key type of the table</typeparam>
     /// <typeparam name="E">Element type of the table</typeparam>
@@ -48,14 +50,14 @@ namespace Vulpine.Core.Data.Tables
 
         /// <summary>
         /// Represents the internal size of the table, or how many buckets
-        /// it has avaliable to sort and store items.
+        /// it has available to sort and store items.
         /// </summary>
         public abstract int Buckets { get; }
 
         /// <summary>
         /// Accesses the items in the table by key. If a key is set to null,
         /// that key is instead removed from the table. See the respective
-        /// retreve, overwirte, and remove methods for more details.
+        /// retrieve, overwrite, and remove methods for more details.
         /// </summary>
         /// <param name="key">The key pointing to the item</param>
         /// <returns>The matching item</returns>
@@ -77,7 +79,7 @@ namespace Vulpine.Core.Data.Tables
         #region Abstract Methods...
 
         /// <summary>
-        /// Retreives a value from the table that matches the given key. If no
+        /// Retrieves a value from the table that matches the given key. If no
         /// match for the key can be found, it returns null.
         /// </summary>
         /// <param name="key">Key of the desired item</param>

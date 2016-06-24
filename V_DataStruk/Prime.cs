@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+//spell-checked
+
 namespace Vulpine.Core.Data
 {
     /// <summary>
     /// Contains a collection of static methods involving prime numbers. Examples
-    /// include the generation of prime numbers and tests for primamilty.
+    /// include the generation of prime numbers and tests for primality.
     /// </summary>
     /// <remarks>Last Update: 2016-06-20</remarks>
     public static class Prime
@@ -41,8 +43,8 @@ namespace Vulpine.Core.Data
         }
 
         /// <summary>
-        /// Determins if a given number is prime or composet. It returns
-        /// true if the number is prime and false if it is composet.
+        /// Determines if a given number is prime or composite. It returns
+        /// true if the number is prime and false if it is composite.
         /// </summary>
         /// <param name="n">Number to test</param>
         /// <returns>True if the number is prime</returns>

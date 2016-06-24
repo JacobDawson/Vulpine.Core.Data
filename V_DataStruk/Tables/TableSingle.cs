@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+//spell-checked
+
 using Vulpine.Core.Data.Trees;
 
 namespace Vulpine.Core.Data.Tables
@@ -11,9 +13,9 @@ namespace Vulpine.Core.Data.Tables
     /// This implementation of a Table uses a single self-balancing tree to store
     /// its items, and is little more than a wrapper for the table interface. Because
     /// it only has a single bucket to store its items, look-up times are O(log n) in
-    /// the general case. However, because it dose not use hashing to determin where
-    /// to store its items, it is not suseptable to hash collisions. And it can prove
-    /// to be quite effecent when the number of items in the table is small.
+    /// the general case. However, because it dose not use hashing to determine where
+    /// to store its items, it is not susceptible to hash collisions. And it can prove
+    /// to be quite efficient when the number of items in the table is small.
     /// </summary>
     /// <typeparam name="K">Key type of the table</typeparam>
     /// <typeparam name="E">Element type of the table</typeparam>
@@ -30,7 +32,7 @@ namespace Vulpine.Core.Data.Tables
         /// </summary>
         public TableSingle()
         {
-            //creates the singluar red-black tree
+            //creates the singular red-black tree
             inner = new TreeRedBlack<KeyedItem<K, E>>();
         }
 
@@ -40,7 +42,7 @@ namespace Vulpine.Core.Data.Tables
         /// <param name="pairs">The entries into the table</param>
         public TableSingle(IEnumerable<KeyedItem<K, E>> pairs)
         {
-            //creates the singluar red-black tree
+            //creates the singular red-black tree
             inner = new TreeRedBlack<KeyedItem<K, E>>();
 
             //adds the key-value pairs one at a time
@@ -49,14 +51,14 @@ namespace Vulpine.Core.Data.Tables
 
         /// <summary>
         /// Constructs a new table, containing multiple entries. The keys
-        /// for the entries are derived from a seperate key selector funciton.
+        /// for the entries are derived from a separate key selector function.
         /// </summary>
         /// <param name="items">The items to be stored in the table</param>
-        /// <param name="selector">A funciton to derive the keys for each
+        /// <param name="selector">A function to derive the keys for each
         /// item that is stored in the table</param>
         public TableSingle(IEnumerable<E> items, Func<E, K> selector)
         {
-            //creates the singluar red-black tree
+            //creates the singular red-black tree
             inner = new TreeRedBlack<KeyedItem<K, E>>();
 
             //adds the key-value pairs one at a time
@@ -72,7 +74,7 @@ namespace Vulpine.Core.Data.Tables
         #region Class Properties...
 
         /// <summary>
-        /// Determins if the table is empty or contains items. It is
+        /// Determines if the table is empty or contains items. It is
         /// set to true if empty and false if otherwise.
         /// </summary>
         public override bool Empty
@@ -102,7 +104,7 @@ namespace Vulpine.Core.Data.Tables
         #region Table Implementation...
 
         /// <summary>
-        /// Determins if a paticular key is already in use in this table.
+        /// Determines if a particular key is already in use in this table.
         /// It returns true if the key exists, and false otherwise.
         /// </summary>
         /// <param name="key">Key to test</param>
@@ -112,13 +114,13 @@ namespace Vulpine.Core.Data.Tables
             //if the key is null we don't contain it
             if (key == null) return false;
 
-            //uses a fake key inorder to probe the tree
+            //uses a fake key in order to probe the tree
             var fake_key = new KeyedItem<K, E>(key);
             return inner.Contains(fake_key);
         }
 
         /// <summary>
-        /// Retreives a value from the table that matches the given key. If no
+        /// Retrieves a value from the table that matches the given key. If no
         /// match for the key can be found, it returns null.
         /// </summary>
         /// <param name="key">Key of the desired item</param>
@@ -196,7 +198,7 @@ namespace Vulpine.Core.Data.Tables
             //if the key is null we don't contain it
             if (key == null) return default(E);     
 
-            //uses a fake key inorder to probe the tree
+            //uses a fake key in order to probe the tree
             var fake_key = new KeyedItem<K, E>(key);
 
             //removes the item and stores the result

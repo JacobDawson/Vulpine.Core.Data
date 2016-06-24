@@ -3,36 +3,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+//spell-checked
+
 namespace Vulpine.Core.Data.Heeps
 {
     /// <summary>
-    /// A Heep, also known as a priority queue, is a queue-like data structor that
+    /// A Heep, also known as a priority queue, is a queue-like data structure that
     /// contains items with a given priority. The items can then be dequeued from
     /// the Heep in order from highest to lowest priority. What constitutes the highest
-    /// priority is dependent on weather the heep is a min-heep or a max-heep. In a
-    /// min-heep the lowest valued key has the highest priority. Think of it as the
-    /// number one item having higher priority than the number two item. In a max-heep
+    /// priority is dependent on weather the heap is a min-heap or a max-heap. In a
+    /// min-heap the lowest valued key has the highest priority. Think of it as the
+    /// number one item having higher priority than the number two item. In a max-heap
     /// this is reversed, the highest valued key has the highest priority. Although
-    /// it is possable to have diffrent items with the same priority in the heep, no
-    /// garentee is made about their relitive order. Only one of the highest priority
-    /// items is garenteed to be removed at any given time.
+    /// it is possible to have different items with the same priority in the heap, no
+    /// guarantee is made about their relative order. Only one of the highest priority
+    /// items is guaranteed to be removed at any given time.
     /// </summary>
-    /// <typeparam name="K">Key type of the heep</typeparam>
-    /// <typeparam name="E">Element type of the heep</typeparam>
+    /// <typeparam name="K">Key type of the heap</typeparam>
+    /// <typeparam name="E">Element type of the heap</typeparam>
     /// <remarks>Last Update: 2016-06-21</remarks>
     public abstract class Heep<K, E> : VDictionary<K, E>
         where K : IComparable<K>
     {
         #region Class Definitions...
 
-        //determins if the heep is a max-heep or a min-heep
+        //determines if the heap is a max-heap or a min-heap
         protected bool maxheep;
 
         /// <summary>
-        /// Generates a string representation of the heep, desplaying the size 
-        /// of the heep, along with the top-most item and its priority.
+        /// Generates a string representation of the heap, displaying the size 
+        /// of the heap, along with the top-most item and its priority.
         /// </summary>
-        /// <returns>The heep as a string</returns>
+        /// <returns>The heap as a string</returns>
         public override string ToString()
         {
             if (this.Empty) return "Empty Heep";
@@ -52,8 +54,8 @@ namespace Vulpine.Core.Data.Heeps
         #region Class Properties...
 
         /// <summary>
-        /// Determins if this is a min-heep or a max-heep. It returns true
-        /// in the case of a max-heep, and false in case of a min-heep.
+        /// Determines if this is a min-heap or a max-heap. It returns true
+        /// in the case of a max-heap, and false in case of a min-heap.
         /// </summary>
         public bool IsMax
         {
@@ -61,15 +63,15 @@ namespace Vulpine.Core.Data.Heeps
         }
 
         /// <summary>
-        /// Represents the highest priority item in the heep. What constitutes the
-        /// highest priority is dependent on wheather it is a min-heep or a max-heep.
+        /// Represents the highest priority item in the heap. What constitutes the
+        /// highest priority is dependent on whether it is a min-heap or a max-heap.
         /// </summary>
         public abstract E TopItem { get; }
 
         /// <summary>
-        /// Represents the highest priority in the entire heep. This can be seen as
-        /// the priority of the heep itself. What constitutes the highest priority 
-        /// is dependent on wheather it is a min-heep or a max-heep.
+        /// Represents the highest priority in the entire heap. This can be seen as
+        /// the priority of the heap itself. What constitutes the highest priority 
+        /// is dependent on whether it is a min-heap or a max-heap.
         /// </summary>
         public abstract K TopKey { get; }
 
@@ -78,17 +80,17 @@ namespace Vulpine.Core.Data.Heeps
         #region Abstract Methods...
 
         /// <summary>
-        /// Removes the top-most item from the heep and returns its value. What 
-        /// constitutes the top-most item is dependent on wheather it is a min-heep 
-        /// or a max-heep. It reutrns null if the heep is empty.
+        /// Removes the top-most item from the heap and returns its value. What 
+        /// constitutes the top-most item is dependent on whether it is a min-heap 
+        /// or a max-heap. It returns null if the heap is empty.
         /// </summary>
         /// <returns>The highest priority item, or null if empty</returns>
         public abstract E Dequeue();
 
         /// <summary>
-        /// Removes the top-most item from the heep and returns both its value
+        /// Removes the top-most item from the heap and returns both its value
         /// and its priority. What constitutes the top-most item is dependent on 
-        /// wheather it is a min-heep or a max-heep.
+        /// whether it is a min-heap or a max-heap.
         /// </summary>
         /// <param name="key">The priority of the item removed</param>
         /// <returns>The highest priority item, or null if empty</returns>
@@ -101,7 +103,7 @@ namespace Vulpine.Core.Data.Heeps
         /// <summary>
         /// Helper method used to compare one pair of items to another. Only
         /// the keys of the items are used, the values are ignored. It inverts
-        /// the results of comparison in case of a max-heep.
+        /// the results of comparison in case of a max-heap.
         /// </summary>
         /// <param name="item1">First pair to be compared</param>
         /// <param name="item2">Second pair to be compared</param>

@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+//spell-checked
+
 namespace Vulpine.Core.Data
 {
     /// <summary>
-    /// A Liniar Node contains a single rerence to the next node in sequence,
+    /// A Linear Node contains a single reference to the next node in sequence,
     /// which may be NULL in a terminating sequence. This way a chain of nodes can
-    /// be formed, by chaning each node to the next. A Liniar node also contains
-    /// a special refrence to the previous node in sequence. This link however is
+    /// be formed, by chaining each node to the next. A Linear node also contains
+    /// a special reference to the previous node in sequence. This link however is
     /// not considered one of the node's children. Updating either the Previous or
-    /// Next links will overite the corisponding link on the corisponding node.
+    /// Next links will overwrite the corresponding link on the corresponding node.
     /// This means that (A.Next = B) has the same effect as (B.Prev = A).
     /// </summary>
     /// <typeparam name="T">The data type of the node</typeparam>
@@ -20,7 +22,7 @@ namespace Vulpine.Core.Data
     {
         #region Class Definitions...
 
-        //the item being refrenced
+        //the item being referenced
         private T item;
 
         //the neighboring nodes in the chain
@@ -31,7 +33,7 @@ namespace Vulpine.Core.Data
         /// Constructs a new node.
         /// </summary>
         /// <param name="item">The data inside the node</param>
-        /// <param name="prev">The node's predessor</param>
+        /// <param name="prev">The node's predecessor</param>
         /// <param name="next">The node's successor</param>
         public NodeLiniar(T item, NodeLiniar<T> prev = null, 
             NodeLiniar<T> next = null)
@@ -82,7 +84,7 @@ namespace Vulpine.Core.Data
 
         /// <summary>
         /// The successor node. Changing this value updates the new 
-        /// succesor's predacessor to reflect the change. To clear
+        /// successor's predecessor to reflect the change. To clear
         /// the value, set it to null.
         /// </summary>
         public NodeLiniar<T> Next
@@ -100,8 +102,8 @@ namespace Vulpine.Core.Data
         }
 
         /// <summary>
-        /// The predacessor node. Changing this value updates the new
-        /// predacessor's successor to reflect the change. To clear
+        /// The predecessor node. Changing this value updates the new
+        /// predecessor's successor to reflect the change. To clear
         /// the value, set it to null.
         /// </summary>
         public NodeLiniar<T> Prev
@@ -134,7 +136,7 @@ namespace Vulpine.Core.Data
         }
 
         /// <summary>
-        /// Removes all linked refrences from this node inorder to avoid
+        /// Removes all linked references from this node in order to avoid
         /// memory leaks. This should only be called when the node structure
         /// is being broken down.
         /// </summary>

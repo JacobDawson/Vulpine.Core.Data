@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+//spell-checked
+
 namespace Vulpine.Core.Data.Lists
 {
     /// <summary>
@@ -208,7 +210,7 @@ namespace Vulpine.Core.Data.Lists
         /// if it comes second, and zero if they are equal</returns>
         protected int Compare(E item1, E item2)
         {
-            //uses the default comparison function if nessary
+            //uses the default comparison function if necessary
             if (comparer == null) return item1.CompareTo(item2);
 
             //uses the custom comparison function, then the default

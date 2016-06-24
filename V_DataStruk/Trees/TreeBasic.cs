@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+//spell-checked
+
 namespace Vulpine.Core.Data.Trees
 {
     /// <summary>
-    /// A Basic Tree provides the most basic, yet complete, imprementation of a
-    /// binary search tree. By default, it dose not reblance the tree after insertion 
-    /// or removal. As sutch, the success of the tree is highly dependet on insertion 
+    /// A Basic Tree provides the most basic, yet complete, implementation of a
+    /// binary search tree. By default, it dose not re-balance the tree after insertion 
+    /// or removal. As such, the success of the tree is highly dependent on insertion 
     /// order. In the worst case, it dose not preform any better than a linked list.
-    /// However, it is possable for derived classes to balance the tree by overriting
+    /// However, it is possible for derived classes to balance the tree by overwriting
     /// the virtual methods CreateNode(), RebalInsert(), and RebalDelete(). You can
-    /// guage how well-balanced a tree is by checking its depth.
+    /// gage how well-balanced a tree is by checking its depth.
     /// </summary>
     /// <typeparam name="E">The element type of the tree</typeparam>
     /// <remarks>Last Update: 2016-06-04</remarks>
@@ -22,13 +24,13 @@ namespace Vulpine.Core.Data.Trees
         #region Class Definitions...
 
         /// <summary>
-        /// Creates an empty tree, spesifying an optional comparison function,
+        /// Creates an empty tree, specifying an optional comparison function,
         /// used for sorting the items that are inserted into the tree.
         /// </summary>
         /// <param name="comp">Comparison operator to be used</param>
         public TreeBasic(Comparison<E> comp = null)
         {
-            //initialises the tree
+            //initializes the tree
             comparer = comp;
             Clear();
         }
@@ -39,7 +41,7 @@ namespace Vulpine.Core.Data.Trees
         /// <param name="items">The items of the tree</param>
         public TreeBasic(params E[] items)
         {
-            //initialises the tree
+            //initializes the tree
             comparer = null;
             Clear();
 
@@ -53,7 +55,7 @@ namespace Vulpine.Core.Data.Trees
         /// <param name="items">The items of the tree</param>
         public TreeBasic(IEnumerable<E> items)
         {
-            //initialises the tree
+            //initializes the tree
             comparer = null;
             Clear();
 
@@ -91,7 +93,7 @@ namespace Vulpine.Core.Data.Trees
                 comp = Compare(item, node.Data);
                 parrent = node;
 
-                //determins which way to travel down the tree
+                //determines which way to travel down the tree
                 node = (comp < 0) ? node.Left : node.Right;
             }
 
@@ -101,7 +103,7 @@ namespace Vulpine.Core.Data.Trees
             else if (comp < 0) parrent.Left = node;
             else parrent.Right = node;
 
-            //preforms any rebalancing, if applicable
+            //preforms any re-balancing, if applicable
             RebalInsert(node);
 
             //updates size and resets height
@@ -112,19 +114,19 @@ namespace Vulpine.Core.Data.Trees
         /// <summary>
         /// Removes a given item from the tree. If the tree contains duplicate 
         /// values, the first instance found is removed. It returns true if the 
-        /// item was succesfully removed, and false if otherwise.
+        /// item was successfully removed, and false if otherwise.
         /// </summary>
         /// <param name="item">Item to be removed</param>
-        /// <returns>True if the item was succesfuly removed</returns>
+        /// <returns>True if the item was successfully removed</returns>
         public override bool Remove(E targ)
         {
-            //atempts to locate the node in the tree
+            //attempts to locate the node in the tree
             NodeBinary<E> node = FindNode(targ);
 
             //checks for items that are not found
             if (node == null) return false;
 
-            //reduces the task to removing the inorder sucessor
+            //reduces the task to removing the in-order successor
             node = ReplaceSucessor(node);
             NodeBinary<E> parent = node.Parent;
             NodeBinary<E> child = node.Right;
@@ -133,10 +135,10 @@ namespace Vulpine.Core.Data.Trees
             if (child == null) child = node.Left;
             if (child != null) child.Parent = null;
 
-            //preforms any rebalancing, if applicable
+            //preforms any re-balancing, if applicable
             RebalDelete(node, child);
 
-            //deletes the node acordingly
+            //deletes the node accordingly
             if (parent == null) root = child;
             else if (parent.Right == node) parent.Right = child;
             else if (parent.Left == node) parent.Left = child;
@@ -150,17 +152,17 @@ namespace Vulpine.Core.Data.Trees
         }
 
         /// <summary>
-        /// Determins if the tree contains an item matching the given target.
+        /// Determines if the tree contains an item matching the given target.
         /// </summary>
         /// <param name="targ">Target to match</param>
         /// <returns>True if a similar item is contained in the tree,
         /// false if otherwise</returns>
         public override bool Contains(E targ)
         {
-            //atempts to locate the node in the tree
+            //attempts to locate the node in the tree
             NodeBinary<E> node = FindNode(targ);
 
-            //indicates if the item was sucessfully found
+            //indicates if the item was successfully found
             return (node != null);
         }
 
@@ -172,7 +174,7 @@ namespace Vulpine.Core.Data.Trees
         /// <returns>The matching item, or null if not found</returns>
         public override E Retreve(E targ)
         {
-            //atempts to locate the node in the tree
+            //attempts to locate the node in the tree
             NodeBinary<E> node = FindNode(targ);
             if (node == null) return default(E);
 
@@ -183,7 +185,7 @@ namespace Vulpine.Core.Data.Trees
         /// <summary>
         /// Retrieves either the minimum or the maximum valued item in the
         /// tree, based on the item's sorted order. It returns null if the
-        /// tree is curtently empty.
+        /// tree is currently empty.
         /// </summary>
         /// <param name="max">Set true for the maximum value, or false for
         /// the minimum value</param>
@@ -206,7 +208,7 @@ namespace Vulpine.Core.Data.Trees
 
         /// <summary>
         /// Same as the GetMinMax() method, except that it also removes the
-        /// item from the tree after obtaning it.
+        /// item from the tree after obtaining it.
         /// </summary>
         /// <param name="max">Set true for the maximum value, or false for
         /// the minimum value</param>
@@ -230,10 +232,10 @@ namespace Vulpine.Core.Data.Trees
             NodeBinary<E> child = node.GetChild(!max);
             if (child != null) child.Parent = null;
 
-            //preforms any rebalancing, if applicable
+            //preforms any re balancing, if applicable
             RebalDelete(node, child);
 
-            //deletes the node acordingly
+            //deletes the node accordingly
             if (parent == null) root = child;
             else if (parent.Right == node) parent.Right = child;
             else if (parent.Left == node) parent.Left = child;
@@ -254,7 +256,7 @@ namespace Vulpine.Core.Data.Trees
         /// <summary>
         /// Creates a new node containing the designated item. By default,
         /// it uses ordinary, binary nodes. However, sub-classes can override
-        /// it to create special nodes that store aditional data.
+        /// it to create special nodes that store additional data.
         /// </summary>
         /// <param name="item">Item inside the node</param>
         /// <returns>A new tree node</returns>
@@ -265,15 +267,15 @@ namespace Vulpine.Core.Data.Trees
         }
 
         /// <summary>
-        /// Atempts to rebalance the tree after a node has been insterted.
-        /// By default it dose nothing, but sub-clases can override it.
+        /// Attempts to re-balance the tree after a node has been inserted.
+        /// By default it dose nothing, but sub-classes can override it.
         /// </summary>
         /// <param name="node">Node that was inserted</param>
         protected virtual void RebalInsert(NodeBinary<E> node) {}
 
         /// <summary>
-        /// Atempts to rebalance the tree before a node has been removed.
-        /// By default it dose nothing, but sub-clases can override it.
+        /// Attempts to re-balance the tree before a node has been removed.
+        /// By default it dose nothing, but sub-classes can override it.
         /// </summary>
         /// <param name="node">Node to be deleted</param>
         /// <param name="child">Child of node to be deleted</param>
@@ -286,13 +288,13 @@ namespace Vulpine.Core.Data.Trees
 
         /// <summary>
         /// Helper method, locates a node who's item matches the target. 
-        /// If no sutch node is found, it returns null.
+        /// If no such node is found, it returns null.
         /// </summary>
         /// <param name="target">Target item</param>
         /// <returns>The node containing the target</returns>
         protected NodeBinary<E> FindNode(E target)
         {
-            //used in searchign for the node
+            //used in searching for the node
             NodeBinary<E> node = root;
             int comp = 1;
 
@@ -301,7 +303,7 @@ namespace Vulpine.Core.Data.Trees
                 //preforms the comparison
                 comp = Compare(target, node.Data);
 
-                //determins which way to travel down the tree
+                //determines which way to travel down the tree
                 if (comp < 0) node = node.Left;
                 if (comp > 0) node = node.Right;
             }
@@ -311,25 +313,25 @@ namespace Vulpine.Core.Data.Trees
         }
 
         /// <summary>
-        /// Helper method, replaces the given node with it's inorder
-        /// succesor or predecessor. Note that it is possable for 
-        /// the node to be it's own sucessor.
+        /// Helper method, replaces the given node with it's in-order
+        /// successor or predecessor. Note that it is possible for 
+        /// the node to be it's own successor.
         /// </summary>
         /// <param name="node">Node to be replaced</param>
         /// <returns>The successor of the node</returns>
         protected NodeBinary<E> ReplaceSucessor(NodeBinary<E> node)
         {
-            //determins if the node is its own succesor
+            //determines if the node is its own successor
             if (node.Left == null || node.Right == null) return node;
 
-            //used to find the inorder successor
+            //used to find the in-order successor
             NodeBinary<E> child = node.Right;
 
-            //finds the inorder successor
+            //finds the in-order successor
             while (child.Left != null) 
                 child = child.Left;
 
-            //copys the contaning item
+            //copies the containing item
             node.Data = child.Data;
             return child;
         }

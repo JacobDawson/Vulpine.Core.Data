@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Vulpine.Core.Data.Exceptions;
+//spell-checked
 
 namespace Vulpine.Core.Data
 {
     /// <summary>
-    /// A Binary Node allows for up to two succeseors per node, labled the left
-    /// and right child respectfully. It is possable for a Binary Node to have
+    /// A Binary Node allows for up to two successors per node, labeled the left
+    /// and right child respectfully. It is possible for a Binary Node to have
     /// no children, in which case it is called a Leaf. Each Binary Node also
-    /// contains a special refrence to it's Parrent node. The Parent of a Node
-    /// is a Node that contains the original as a child. The Parent refrence is
-    /// updated automaticly, whenever you update the Left and Right references.
+    /// contains a special reference to it's Parent node. The Parent of a Node
+    /// is a Node that contains the original as a child. The Parent reference is
+    /// updated automatically, whenever you update the Left and Right references.
     /// </summary>
     /// <typeparam name="T">The data type of the node</typeparam>
     /// <remarks>Last Update: 2016-05-24</remarks>
@@ -21,7 +21,7 @@ namespace Vulpine.Core.Data
     {
         #region Class Definitions...
 
-        //the item being refrenced
+        //the item being referenced
         private T item;
 
         //the children of the current node
@@ -44,7 +44,7 @@ namespace Vulpine.Core.Data
             this.left = left;
             this.right = right;
 
-            //takes care of assigning parrent links
+            //takes care of assigning parent links
             if (left != null) left.parent = this;
             if (right != null) right.parent = this;
 
@@ -102,7 +102,7 @@ namespace Vulpine.Core.Data
 
         /// <summary>
         /// The left child of the node. Setting this value updates the
-        /// left child's parent refrence.
+        /// left child's parent reference.
         /// </summary>
         public NodeBinary<T> Left
         {
@@ -120,7 +120,7 @@ namespace Vulpine.Core.Data
 
         /// <summary>
         /// The right child of the node. Setting this value updates the
-        /// right child's parent refrence.
+        /// right child's parent reference.
         /// </summary>
         public NodeBinary<T> Right
         {
@@ -137,9 +137,9 @@ namespace Vulpine.Core.Data
         }
 
         /// <summary>
-        /// The parent of the current node. The parent refrence is
-        /// maintained internaly, but may be set to NULL in order
-        /// to clear the refrence.
+        /// The parent of the current node. The parent reference is
+        /// maintained internally, but may be set to NULL in order
+        /// to clear the reference.
         /// </summary>
         public NodeBinary<T> Parent
         {
@@ -200,7 +200,7 @@ namespace Vulpine.Core.Data
         }
 
         /// <summary>
-        /// Removes all linked refrences from this node inorder to avoid
+        /// Removes all linked references from this node in order to avoid
         /// memory leaks. This should only be called when the node structure
         /// is being broken down.
         /// </summary>

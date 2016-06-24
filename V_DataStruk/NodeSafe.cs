@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
-using Vulpine.Core.Data.Exceptions;
-
+//spell-checked
 
 namespace Vulpine.Core.Data
 {
     /// <summary>
-    /// This class provides a read-only wraper to all classes that implement the
-    /// Node interface. This allows for external code to inspect the structor
-    /// of Trees and Graphs and the like, while maintaing the integrity of there
-    /// internal structor. It also employes lazy evaluation, creating new wrapers
-    /// for Nodes only when required. This allows it to be more effecent than
-    /// copying the entire structor verbatum.
+    /// This class provides a read-only wrapper to all classes that implement the
+    /// Node interface. This allows for external code to inspect the structure
+    /// of Trees and Graphs and the like, while maintaining the integrity of there
+    /// internal structure. It also employs lazy evaluation, creating new wrappers
+    /// for Nodes only when required. This allows it to be more efficient than
+    /// copying the entire structure verbatim.
     /// </summary>
     /// <typeparam name="T">The data type of the node</typeparam>
     /// <remarks>Last Update: 2016-05-24</remarks>
@@ -20,19 +21,14 @@ namespace Vulpine.Core.Data
     {
         #region Class Definitions...
 
-        private const string SET_ERR =
-            "It's not possable to set the value contained by a Safe Node, " +
-            "as doing so could disrupt the underlying data structor that " +
-            "the Safe Node was ment to protect. ";
-
-        //stores a refrence to the interior node
+        //stores a reference to the interior node
         private Node<T> inner;
 
         /// <summary>
         /// Creates a read-only node by linking to another node, thus
-        /// creating a safe refrence to that node.
+        /// creating a safe reference to that node.
         /// </summary>
-        /// <param name="inner">The node to refrence</param>
+        /// <param name="inner">The node to reference</param>
         public NodeSafe(Node<T> inner)
         {
             this.inner = inner;
@@ -46,7 +42,7 @@ namespace Vulpine.Core.Data
         public override string ToString()
         {
             //if we've been disposed, give an error message
-            if (inner == null) return "Deleated Node";
+            if (inner == null) return "Deleted Node";
 
             //calls upon the inner node
             return inner.ToString();
@@ -58,7 +54,7 @@ namespace Vulpine.Core.Data
 
         /// <summary>
         /// The data contained within the node. It is denied write
-        /// acces inorder to protect the original node. 
+        /// access in order to protect the original node. 
         /// </summary>
         public T Data
         {
@@ -69,8 +65,8 @@ namespace Vulpine.Core.Data
             }
             set
             {
-                //we arn't allowed to change the internal structor
-                throw new InvalidOperationException(SET_ERR);
+                //we aren't allowed to change the internal structure
+                throw new InvalidOperationException();
             }
         }
 
@@ -94,7 +90,7 @@ namespace Vulpine.Core.Data
         }
 
         /// <summary>
-        /// Preforms a shallow clearing of the read-only node. The internior
+        /// Preforms a shallow clearing of the read-only node. The interior
         /// node cannot be disposed because it may still be in use else-where.
         /// </summary>
         public void Dispose()

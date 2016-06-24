@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+//spell-checked
+
 namespace Vulpine.Core.Data.Trees
 {
     /// <summary>
     /// A Splay Tree is a unique binary search tree that forgoes the desire to keep
     /// the tree balanced. Instead it moves the last accessed item up to the root of
-    /// the tree after every operaiton. This helps exploit locality of refrence by
-    /// enshuring that the most frequently accessed nodes are all found near the 
-    /// root of the tree. Therfore this implementation will be most usefull when few
+    /// the tree after every operation. This helps exploit locality of reference by
+    /// ensuring that the most frequently accessed nodes are all found near the 
+    /// root of the tree. Therefore this implementation will be most useful when few
     /// items in the tree are accessed frequently and the rest are accessed infrequently.
     /// </summary>
     /// <typeparam name="E">The element type of the tree</typeparam>
@@ -21,13 +23,13 @@ namespace Vulpine.Core.Data.Trees
         #region Class Definitions...
 
         /// <summary>
-        /// Creates an empty tree, spesifying an optional comparison function,
+        /// Creates an empty tree, specifying an optional comparison function,
         /// used for sorting the items that are inserted into the tree.
         /// </summary>
         /// <param name="comp">Comparison operator to be used</param>
         public TreeSplay(Comparison<E> comp = null)
         {
-            //initialises the tree
+            //initializes the tree
             comparer = comp;
             Clear();
         }
@@ -38,7 +40,7 @@ namespace Vulpine.Core.Data.Trees
         /// <param name="items">The items of the tree</param>
         public TreeSplay(params E[] items)
         {
-            //initialises the tree
+            //initializes the tree
             comparer = null;
             Clear();
 
@@ -52,7 +54,7 @@ namespace Vulpine.Core.Data.Trees
         /// <param name="items">The items of the tree</param>
         public TreeSplay(IEnumerable<E> items)
         {
-            //initialises the tree
+            //initializes the tree
             comparer = null;
             Clear();
 
@@ -109,10 +111,10 @@ namespace Vulpine.Core.Data.Trees
         /// <summary>
         /// Removes a given item from the tree. If the tree contains duplicate 
         /// values, the first instance found is removed. It returns true if the 
-        /// item was succesfully removed, and false if otherwise.
+        /// item was successfully removed, and false if otherwise.
         /// </summary>
         /// <param name="item">Item to be removed</param>
-        /// <returns>True if the item was succesfuly removed</returns>
+        /// <returns>True if the item was successfully removed</returns>
         public override bool Remove(E targ)
         {
             //checks for an empty tree
@@ -121,7 +123,7 @@ namespace Vulpine.Core.Data.Trees
             Splay(targ, false);
             NodeBinary<E> temp = root;
 
-            //checks to see if the item was actualy found
+            //checks to see if the item was actually found
             if (Compare(targ, root.Data) != 0) return false;
 
             if (root.Right == null)
@@ -140,7 +142,7 @@ namespace Vulpine.Core.Data.Trees
             }
             else
             {
-                //we must use the inorder successor
+                //we must use the in-order successor
                 NodeBinary<E> node = root.Left;
 
                 //safely deleats the root and updates the tree
@@ -148,11 +150,11 @@ namespace Vulpine.Core.Data.Trees
                 root.Parent = null;
                 SplayMinMax(false);
 
-                //reataches the old root's sub-tree
+                //reattaches the old root's sub-tree
                 root.Left = node;
             }
 
-            //updates size and desposes of the old root
+            //updates size and disposes of the old root
             size = size - 1;
             temp.Dispose();
 
@@ -160,7 +162,7 @@ namespace Vulpine.Core.Data.Trees
         }
 
         /// <summary>
-        /// Determins if the tree contains an item matching the given target.
+        /// Determines if the tree contains an item matching the given target.
         /// </summary>
         /// <param name="targ">Target to match</param>
         /// <returns>True if a similar item is contained in the tree,
@@ -172,7 +174,7 @@ namespace Vulpine.Core.Data.Trees
 
             Splay(targ, false);
 
-            //indicates if the item was sucessfully found
+            //indicates if the item was successfully found
             return targ.CompareTo(root.Data) == 0;
         }
 
@@ -197,7 +199,7 @@ namespace Vulpine.Core.Data.Trees
         /// <summary>
         /// Retrieves either the minimum or the maximum valued item in the
         /// tree, based on the item's sorted order. It returns null if the
-        /// tree is curtently empty.
+        /// tree is currently empty.
         /// </summary>
         /// <param name="max">Set true for the maximum value, or false for
         /// the minimum value</param>
@@ -211,7 +213,7 @@ namespace Vulpine.Core.Data.Trees
 
         /// <summary>
         /// Same as the GetMinMax() method, except that it also removes the
-        /// item from the tree after obtaning it.
+        /// item from the tree after obtaining it.
         /// </summary>
         /// <param name="max">Set true for the maximum value, or false for
         /// the minimum value</param>
@@ -250,8 +252,6 @@ namespace Vulpine.Core.Data.Trees
         /// <param name="target">Item to be splayed</param>
         /// <param name="insert">Set true if target is to be inserted,
         /// and false otherwise</param>
-        /// <exception cref="DuplicateValExcp">If a duplicate insertion
-        /// is atempted when duplicates are not allowed</exception>
         private void Splay(E target, bool insert)
         {
             //can't splay an empty tree
@@ -264,32 +264,32 @@ namespace Vulpine.Core.Data.Trees
 
             while (node != null && comp != 0)
             {
-                //repreforms the comparison
+                //re-preforms the comparison
                 comp = Compare(target, node.Data);
                 parrent = node;
 
                 //must keep searching if we are doing an insert
                 if (insert && comp == 0) comp = -1;
 
-                //determins which way to travel down the tree
+                //determines which way to travel down the tree
                 if (comp < 0) node = node.Left;
                 if (comp > 0) node = node.Right;
             }
 
             while (parrent != root)
             {
-                //splayes the node or its parrent to the root
+                //splays the node or its parent to the root
                 if (Zig(parrent)) continue;
                 if (ZigZig(parrent)) continue;
                 if (ZigZag(parrent)) continue;
             }
 
-            //makes shure that nothing is above the root
+            //makes sure that nothing is above the root
             if (root != null) root.Parent = null;
         }
 
         /// <summary>
-        /// Helper method, splays the node contaning either the maximum
+        /// Helper method, splays the node containing either the maximum
         /// or minimum value up to the root of the tree.
         /// </summary>
         /// <param name="max">True to splay the maximum value, false 
@@ -308,32 +308,32 @@ namespace Vulpine.Core.Data.Trees
 
             while (target != root)
             {
-                //splayes the min or max to the root
+                //splays the min or max to the root
                 if (Zig(target)) continue;
                 if (ZigZig(target)) continue;
                 if (ZigZag(target)) continue;
             }
 
-            //makes shure that nothing is above the root
+            //makes sure that nothing is above the root
             if (root != null) root.Parent = null;
         }
 
         /// <summary>
-        /// Preformes a Zig operation by moving the target node to the
+        /// Preforms a Zig operation by moving the target node to the
         /// root in a single rotation. This step is only preformed if
         /// the parent is the root.
         /// </summary>
         /// <param name="node">The target node</param>
-        /// <returns>True if the opperation succedes</returns>
+        /// <returns>True if the operation succeeds</returns>
         private bool Zig(NodeBinary<E> node)
         {
-            //obtains the parrent of the node
+            //obtains the parent of the node
             NodeBinary<E> parr = node.Parent;
 
-            //only zig if the parrent is the root
+            //only zig if the parent is the root
             if (parr != root) return false;
 
-            //rotates the parrent to pull the node up
+            //rotates the parent to pull the node up
             if (node == parr.Left) RotateRight(parr);
             if (node == parr.Right) RotateLeft(parr);
 
@@ -341,15 +341,15 @@ namespace Vulpine.Core.Data.Trees
         }
 
         /// <summary>
-        /// Preformes a Zig-Zig opperaton in which the grandparent is
+        /// Preforms a Zig-Zig operation in which the grandparent is
         /// rotated first. This is only preformed when the node and the
         /// parent are on the same side.
         /// </summary>
         /// <param name="node">The target node</param>
-        /// <returns>True if the opperation succedes</returns>
+        /// <returns>True if the operation succeeds</returns>
         private bool ZigZig(NodeBinary<E> node)
         {
-            //obtains the parrent and grandparent
+            //obtains the parent and grandparent
             NodeBinary<E> parr = node.Parent;
             NodeBinary<E> grad = parr.Parent;
 
@@ -373,19 +373,19 @@ namespace Vulpine.Core.Data.Trees
         }
 
         /// <summary>
-        /// Preformes a Zig-Zag operation in which the parent is rotated
+        /// Preforms a Zig-Zag operation in which the parent is rotated
         /// first. This is only preformed when the node and the parent
-        /// are on the oppisite sides.
+        /// are on the opposite sides.
         /// </summary>
         /// <param name="node">The target node</param>
-        /// <returns>True if the opperation succedes</returns>
+        /// <returns>True if the operation succeeds</returns>
         private bool ZigZag(NodeBinary<E> node)
         {
-            //obtains the parrent and grandparent
+            //obtains the parent and grandparent
             NodeBinary<E> parr = node.Parent;
             NodeBinary<E> grad = parr.Parent;
 
-            //must zigzag if node and parrent are oppsite children
+            //must zigzag if node and parent are opposite children
             if (node == parr.Right && parr == grad.Left)
             {
                 RotateLeft(parr);
@@ -393,7 +393,7 @@ namespace Vulpine.Core.Data.Trees
                 return true;
             }
 
-            //must zigzag if node and parrent are oppsite children
+            //must zigzag if node and parent are opposite children
             if (node == parr.Left && parr == grad.Right)
             {
                 RotateRight(parr);

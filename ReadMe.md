@@ -16,5 +16,5 @@ seen as a replacement for System.Collections.Generic. In includes some new
 features, including new data structures missing from the system library. It 
 also focuses more on implementation, allowing the user to select the best 
 implementation for the current job. It also contains a few additional classes 
-which pertain to data structures, and are used throughout the reset of the 
+which pertain to data structures, and are used throughout the rest of the 
 library.

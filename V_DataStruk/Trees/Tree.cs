@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+//spell-checked
+
 using Vulpine.Core.Data.Queues;
 
 namespace Vulpine.Core.Data.Trees
 {
     /// <summary>
-    /// A Tree, or more spesificly a binary search tree, is a tree-like data structor
-    /// where each node can have up to two children, labled the right and left child
-    /// respectifully. In adition, the left child always comes before the node in
-    /// sorted order, and the right child comes after. This way, it is possable to
+    /// A Tree, or more specifically a binary search tree, is a tree-like data structure
+    /// where each node can have up to two children, labeled the right and left child
+    /// respectfully. In addition, the left child always comes before the node in
+    /// sorted order, and the right child comes after. This way, it is possible to
     /// find any node in the tree by searching either to the left or right from the 
     /// current node. When the tree is balanced, this equates to the binary search 
-    /// algorythm. The minimum and maximum values in the tree can also be found in a 
+    /// algorithm. The minimum and maximum values in the tree can also be found in a 
     /// similar manner, by always following the left or right links.
     /// </summary>
     /// <typeparam name="E">The element type of the tree</typeparam>
@@ -35,7 +37,7 @@ namespace Vulpine.Core.Data.Trees
         protected Comparison<E> comparer;
 
         /// <summary>
-        /// Generates a string representation of the tree, desplaying
+        /// Generates a string representation of the tree, displaying
         /// the size and depth of the tree, as well as the item located
         /// at its root.
         /// </summary>
@@ -57,7 +59,7 @@ namespace Vulpine.Core.Data.Trees
         #region Class Propertys...
 
         /// <summary>
-        /// Determins if the tree is empty or contains items. It is
+        /// Determines if the tree is empty or contains items. It is
         /// set to true if empty and false if otherwise.
         /// </summary>
         public override bool Empty
@@ -82,7 +84,7 @@ namespace Vulpine.Core.Data.Trees
         {
             get 
             {
-                //recalculates the depth, only when nessary
+                //recalculates the depth, only when necessary
                 if (depth < 0) depth = CalcDepth(root);
 
                 return depth;
@@ -95,24 +97,24 @@ namespace Vulpine.Core.Data.Trees
 
         /// <summary>
         /// Removes the minimum valued item from the tree, treating it as if
-        /// it were a min-heep. It returns null if the tree is empty.
+        /// it were a min-heap. It returns null if the tree is empty.
         /// </summary>
         /// <returns>The minimum value, or null if empty</returns>
         public override E Dequeue()
         {
-            //treats the tree like a min-heep
+            //treats the tree like a min-heap
             return RemoveMinMax(false);
         }
 
         /// <summary>
-        /// Exposes the tree's internal structor in a safe way, by returning
-        /// a read-only refrence to the root node. This way, the structor of
-        /// the tree can be explored without comprimising its integrity.
+        /// Exposes the tree's internal structure in a safe way, by returning
+        /// a read-only reference to the root node. This way, the structure of
+        /// the tree can be explored without compromising its integrity.
         /// </summary>
         /// <returns>The root of the tree</returns>
         public Node<E> GetRoot()
         {
-            //no need to bother wraping the root if it's null
+            //no need to bother wrapping the root if it's null
             if (root == null) return null;
 
             //generates a safe copy of the root
@@ -120,15 +122,15 @@ namespace Vulpine.Core.Data.Trees
         }
 
         /// <summary>
-        /// Removes all items from the tree and deconstructs the tree's 
-        /// internal structur, thus preventing any memory leaks.
+        /// Removes all items from the tree and deconstruction the tree's 
+        /// internal structure, thus preventing any memory leaks.
         /// </summary>
         public override void Clear()
         {
             //deletes the tree, starting from the root
             DeleteSubtree(root);
 
-            //sets the intial conditons
+            //sets the initial conditions
             size = depth = 0;
             root = null;          
         }
@@ -148,7 +150,7 @@ namespace Vulpine.Core.Data.Trees
         /// <summary>
         /// Retrieves either the minimum or the maximum valued item in the
         /// tree, based on the item's sorted order. It returns null if the
-        /// tree is curtently empty.
+        /// tree is currently empty.
         /// </summary>
         /// <param name="max">Set true for the maximum value, or false for
         /// the minimum value</param>
@@ -157,7 +159,7 @@ namespace Vulpine.Core.Data.Trees
 
         /// <summary>
         /// Same as the GetMinMax() method, except that it also removes the
-        /// item from the tree after obtaning it.
+        /// item from the tree after obtaining it.
         /// </summary>
         /// <param name="max">Set true for the maximum value, or false for
         /// the minimum value</param>
@@ -170,7 +172,7 @@ namespace Vulpine.Core.Data.Trees
 
         /// <summary>
         /// Enumerates all the items in the tree, using the default
-        /// in-order tree traversal. This enshures that the items are
+        /// in-order tree traversal. This ensures that the items are
         /// listed in sorted order.
         /// </summary>
         /// <returns>An enumerator over the tree</returns>
@@ -181,14 +183,14 @@ namespace Vulpine.Core.Data.Trees
         }
 
         /// <summary>
-        /// Lists all the items in the tree in a depth-first mannor,
-        /// utilising the desired tree traversal.
+        /// Lists all the items in the tree in a depth-first manner,
+        /// utilizing the desired tree traversal.
         /// </summary>
         /// <param name="ord">Desired tree traversal</param>
         /// <returns>The items in the tree</returns>
         public IEnumerable<E> ListIn(TreeOrder ord)
         {
-            //uses a previous refrence to search
+            //uses a previous reference to search
             NodeBinary<E> curr = root;
             NodeBinary<E> prev = null;
 
@@ -233,16 +235,16 @@ namespace Vulpine.Core.Data.Trees
         }
 
         /// <summary>
-        /// Lists all the items in the tree in a bredth-first mannor,
-        /// utilising the level order tree traversal.
+        /// Lists all the items in the tree in a breadth-first manor,
+        /// utilizing the level order tree traversal.
         /// </summary>
         /// <returns>The items in the tree</returns>
         public IEnumerable<E> ListInLevelOrder()
         {
-            //if the root is null, there is nothing to itterate
+            //if the root is null, there is nothing to iterate
             if (root == null) yield break;
 
-            //creates a queue to aid in the itterator
+            //creates a queue to aid in the iterator
             int cap = (size / 2) + 1;
             var queue = new DequeArray<NodeBinary<E>>(cap);
 
@@ -280,7 +282,7 @@ namespace Vulpine.Core.Data.Trees
             NodeBinary<E> adopt = right.Left;
             NodeBinary<E> parr = head.Parent;
 
-            //preformes the rotation
+            //preforms the rotation
             right.Parent = null;
             right.Left = head;
             head.Right = adopt;
@@ -303,7 +305,7 @@ namespace Vulpine.Core.Data.Trees
             NodeBinary<E> adopt = left.Right;
             NodeBinary<E> parr = head.Parent;
 
-            //preformes the rotation
+            //preforms the rotation
             left.Parent = null;
             left.Right = head;
             head.Left = adopt;
@@ -325,7 +327,7 @@ namespace Vulpine.Core.Data.Trees
         /// if it comes second, and zero if they are equal</returns>
         protected int Compare(E item1, E item2)
         {
-            //uses the default comparison function if nessary
+            //uses the default comparison function if necessary
             if (comparer == null) return item1.CompareTo(item2);
 
             //uses the custom comparison function, then the default
@@ -341,8 +343,8 @@ namespace Vulpine.Core.Data.Trees
 
         /// <summary>
         /// A recursive method which deletes an entire sub-tree by disposing
-        /// of the root node and recursivly deleting all of its children.
-        /// This way, no cyclical refrences are left creating memory leaks.
+        /// of the root node and recursively deleting all of its children.
+        /// This way, no cyclical references are left creating memory leaks.
         /// </summary>
         /// <param name="node">Root of the sub-tree</param>
         protected void DeleteSubtree(NodeBinary<E> node)
@@ -350,7 +352,7 @@ namespace Vulpine.Core.Data.Trees
             //reached a leaf of the tree
             if (node == null) return;
 
-            //recursees down the tree
+            //recurses down the tree
             DeleteSubtree(node.Left);
             DeleteSubtree(node.Right);
 
@@ -369,7 +371,7 @@ namespace Vulpine.Core.Data.Trees
             //reached a leaf of the tree
             if (node == null) return 0;
 
-            //recursees down the tree
+            //recurses down the tree
             int left = CalcDepth(node.Left);
             int right = CalcDepth(node.Right);
             return 1 + Math.Max(left, right);

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+//spell-checked
+
 using Vulpine.Core.Data.Lists;
 
 namespace Vulpine.Core.Data.Tables
@@ -11,11 +13,11 @@ namespace Vulpine.Core.Data.Tables
     /// This implementation of a Table uses an array of linked lists to store its
     /// items. Because each bucket may hold more than one item, it can afford to
     /// use closed-address hashing. If two items hash to the same index, they are
-    /// stored in the same bucket. The target bucket must be searched to retreave
-    /// the item, however. Thus the preformance of the table depends heavly on the
-    /// ratio of buckets to items being stored. The table will automaticly update 
+    /// stored in the same bucket. The target bucket must be searched to retrieve
+    /// the item, however. Thus the performance of the table depends heavily on the
+    /// ratio of buckets to items being stored. The table will automatically update 
     /// the number of buckets it has in order to better compensate an increase in 
-    /// size. This allows items in the table to be fetched in O(1) amortised time.
+    /// size. This allows items in the table to be fetched in O(1) amortized time.
     /// </summary>
     /// <typeparam name="K">Key type of the table</typeparam>
     /// <typeparam name="E">Element type of the table</typeparam>
@@ -24,7 +26,7 @@ namespace Vulpine.Core.Data.Tables
     {
         #region Class Definitions...
 
-        //the maximum load factor for optimal preformance
+        //the maximum load factor for optimal performance
         private const double MAXL = 4.0;
 
         //the default base size of the table
@@ -49,7 +51,7 @@ namespace Vulpine.Core.Data.Tables
 
         /// <summary>
         /// Constructs a new table, containing multiple entries. The number of
-        /// buckets is atomaticly determined based on the number of entries.
+        /// buckets is automatically determined based on the number of entries.
         /// </summary>
         /// <param name="pairs">The entries into the table</param>
         public TableClosed(IEnumerable<KeyedItem<K, E>> pairs)
@@ -65,12 +67,12 @@ namespace Vulpine.Core.Data.Tables
 
         /// <summary>
         /// Constructs a new table, containing multiple entries. The keys
-        /// for the entries are derived from a seperate key selector funciton.
-        /// The number of buckets is automaticly determined based on the
+        /// for the entries are derived from a separate key selector function.
+        /// The number of buckets is automatically determined based on the
         /// number of entries.
         /// </summary>
         /// <param name="items">The items to be stored in the table</param>
-        /// <param name="selector">A funciton to derive the keys for each
+        /// <param name="selector">A function to derive the keys for each
         /// item that is stored in the table</param>
         public TableClosed(IEnumerable<E> items, Func<E, K> selector)
         {
@@ -101,7 +103,7 @@ namespace Vulpine.Core.Data.Tables
 
         /// <summary>
         /// Represents the internal size of the table, or how many buckets
-        /// it has avaliable to sort and store items.
+        /// it has available to sort and store items.
         /// </summary>
         public override int Buckets
         {
@@ -113,7 +115,7 @@ namespace Vulpine.Core.Data.Tables
         #region Table Implementation...
 
         /// <summary>
-        /// Determins if a paticular key is already in use in this table.
+        /// Determines if a particular key is already in use in this table.
         /// It returns true if the key exists, and false otherwise.
         /// </summary>
         /// <param name="key">Key to test</param>
@@ -123,7 +125,7 @@ namespace Vulpine.Core.Data.Tables
             //uses a fake key to prob the table
             var fake = new KeyedItem<K, E>(key);
 
-            //findes the bucket for the key
+            //finds the bucket for the key
             int hash = fake.GetHashCode();
             int spot = HashIndex(hash);
 
@@ -132,7 +134,7 @@ namespace Vulpine.Core.Data.Tables
         }
 
         /// <summary>
-        /// Retreives a value from the table that matches the given key. If no
+        /// Retrieves a value from the table that matches the given key. If no
         /// match for the key can be found, it returns null.
         /// </summary>
         /// <param name="key">Key of the desired item</param>
@@ -142,12 +144,12 @@ namespace Vulpine.Core.Data.Tables
             //used in probing the table for the keyed value
             var fake = new KeyedItem<K, E>(key);
 
-            //findes the correct bucket and index
+            //finds the correct bucket and index
             int hash = fake.GetHashCode();
             int spot = HashIndex(hash);
             int index = table[spot].IndexOf(fake) ?? -1;
 
-            //makes shure we have found a match
+            //makes sure we have found a match
             if (index < 0) return default(E);
 
             //returns the item
@@ -172,7 +174,7 @@ namespace Vulpine.Core.Data.Tables
             //creates a new keyed item to contain the pair
             var pair = new KeyedItem<K, E>(key, item);
 
-            //findes the correct bucket and index
+            //finds the correct bucket and index
             int hash = pair.GetHashCode();
             int spot = HashIndex(hash);
 
@@ -202,12 +204,12 @@ namespace Vulpine.Core.Data.Tables
             //creates a new keyed item to contain the pair
             var pair = new KeyedItem<K, E>(key, item);
 
-            //findes the correct bucket and index
+            //finds the correct bucket and index
             int hash = pair.GetHashCode();
             int spot = HashIndex(hash);
             int index = table[spot].IndexOf(pair) ?? -1;
 
-            //removes the key form the table if it alreay exists
+            //removes the key form the table if it already exists
             if (index >= 0)
             {
                 table[spot].RemoveAt(index);
@@ -230,12 +232,12 @@ namespace Vulpine.Core.Data.Tables
             //used in probing the tree for the keyed value
             var fake = new KeyedItem<K, E>(key);
 
-            //findes the correct bucket and index
+            //finds the correct bucket and index
             int hash = fake.GetHashCode();
             int spot = HashIndex(hash);
             int index = table[spot].IndexOf(fake) ?? -1;
 
-            //makes shure we have found a match
+            //makes sure we have found a match
             if (index < 0) return default(E);
 
             //removes the pair from the table
@@ -254,7 +256,7 @@ namespace Vulpine.Core.Data.Tables
         {
             for (int i = 0; i < table.Length; i++)
             {
-                //enumerates each bucket in double-itteration
+                //enumerates each bucket in double-iteration
                 foreach (var pair in table[i]) yield return pair;
             }
         }
@@ -282,8 +284,8 @@ namespace Vulpine.Core.Data.Tables
         #region Helper Methods...
 
         /// <summary>
-        /// Helper method used for inserting a key-value pair into a paticular
-        /// bucket and resizing the table if nessary. It is called from both
+        /// Helper method used for inserting a key-value pair into a particular
+        /// bucket and resizing the table if necessary. It is called from both
         /// Insert and Overwrite to handle the case of insertion.
         /// </summary>
         /// <param name="pair">The pair to be inserted</param>
@@ -294,7 +296,7 @@ namespace Vulpine.Core.Data.Tables
             table[spot].Add(pair);
             size = size + 1;
 
-            //resises the table if we exceed the maximum load
+            //resizes the table if we exceed the maximum load
             int min_size = (int)(size / MAXL) + 1;
             if (table.Length < min_size) ChangeSize(min_size * 2);
         }
@@ -320,7 +322,7 @@ namespace Vulpine.Core.Data.Tables
                     temp[spot].Add(pair);
                 }
 
-                //errases the old bucket
+                //erases the old bucket
                 table[x].Clear();
             }
 
@@ -329,7 +331,7 @@ namespace Vulpine.Core.Data.Tables
         }
 
         /// <summary>
-        /// Helper method for initialising the internal array, with the desired 
+        /// Helper method for initializing the internal array, with the desired 
         /// starting capacity. The capacity must be greater than the step size 
         /// for double hashing to work.
         /// </summary>
@@ -340,14 +342,14 @@ namespace Vulpine.Core.Data.Tables
             if (cap < DBS) cap = DBS;
             cap = Prime.NextPrime(cap - 1);
 
-            //sets the initial contditions
+            //sets the initial conditions
             table = CreateArray(cap);
             size = 0;
         }
 
         /// <summary>
         /// Helper method that creates an array of buckets for the table. 
-        /// It instanciates each of the buckets so they are ready to use.
+        /// It instantiates each of the buckets so they are ready to use.
         /// </summary>
         /// <param name="length">Number of buckets</param>
         /// <returns>An array of buckets</returns>

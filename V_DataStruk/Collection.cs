@@ -4,20 +4,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+//spell-checked
+
 namespace Vulpine.Core.Data
 {
     /// <summary>
-    /// This abstract class provides the basic funcitonality of all collection-type
-    /// data structors in the core library. A colleciton is any group of items that
-    /// share some common structor. Furthermore, it is not permissable to store NULL
-    /// items in a colleciton, as NULL values have the special connotation of "This
+    /// This abstract class provides the basic functionality of all collection-type
+    /// data structures in the core library. A collection is any group of items that
+    /// share some common structure. Furthermore, it is not permissible to store NULL
+    /// items in a collection, as NULL values have the special connotation of "This
     /// item is missing from the collection". It is similar to the ICollection interface 
-    /// but diffrent in certain key aspects. First of all, it is an abstract class, 
+    /// but different in certain key aspects. First of all, it is an abstract class, 
     /// not an interface. It includes a default dequeue method, providing queue-like 
-    /// operations for all collecitons. Not all collections implement the default 
+    /// operations for all collections. Not all collections implement the default 
     /// remove method, so it should be used with caution. Although it dose implement
-    /// the ICollection interface, this is done primarly to suport LINQ operations,
-    /// which run more effecently when the sequence being processed implements ICollection.
+    /// the ICollection interface, this is done primary to support LINQ operations,
+    /// which run more efficiently when the sequence being processed implements ICollection.
     /// </summary>
     /// <typeparam name="E">The element type of the collection</typeparam>
     /// <remarks>Last Update: 2016-06-14</remarks>
@@ -31,7 +33,7 @@ namespace Vulpine.Core.Data
         public abstract int Count { get; }
 
         /// <summary>
-        /// Determins if the collection is empty or contains items. It is
+        /// Determines if the collection is empty or contains items. It is
         /// set to true if empty and false if otherwise.
         /// </summary>
         public virtual bool Empty
@@ -40,8 +42,8 @@ namespace Vulpine.Core.Data
         }
 
         /// <summary>
-        /// Determins if the collection only allows read access. By default 
-        /// data structors allow both read and wright access.
+        /// Determines if the collection only allows read access. By default 
+        /// data structures allow both read and wright access.
         /// </summary>
         public virtual bool IsReadOnly
         {
@@ -53,7 +55,7 @@ namespace Vulpine.Core.Data
         #region Default Operations...
 
         /// <summary>
-        /// Determins if the collection contains a paticular item.
+        /// Determines if the collection contains a particular item.
         /// </summary>
         /// <param name="item">The item to test for containment</param>
         /// <returns>True if the item is contained in the collection,
@@ -69,8 +71,8 @@ namespace Vulpine.Core.Data
         public abstract void Add(E item);
 
         /// <summary>
-        /// Removes a single item at random from the colleciton. The
-        /// exact item removed is determined by the data structor 
+        /// Removes a single item at random from the collection. The
+        /// exact item removed is determined by the data structure 
         /// being implemented. If the collection is empty it returns null.
         /// </summary>
         /// <returns>The item that was removed, or null if empty</returns>
@@ -79,24 +81,24 @@ namespace Vulpine.Core.Data
         /// <summary>
         /// Removes a given item from the collection. If the collection contains
         /// duplicate values, the first instance found is removed. It returns
-        /// true if the item was succesfully removed, and false if otherwise.
+        /// true if the item was successfully removed, and false if otherwise.
         /// </summary>
         /// <param name="item">Item to be removed</param>
-        /// <returns>True if the item was succesfuly removed</returns>
+        /// <returns>True if the item was successfully removed</returns>
         /// <exception cref="NotSuportedException">If the underlying data
-        /// structor dose not suport explitit removal of items</exception>
+        /// structure dose not support explicit removal of items</exception>
         public abstract bool Remove(E item);
 
         /// <summary>
         /// Removes all items from the collection. Causing the collection
-        /// to revert to it's original, initialised state.
+        /// to revert to it's original, initialized state.
         /// </summary>
         public abstract void Clear();
 
         /// <summary>
         /// Creates an enumeration over all the items in the collection. 
         /// </summary>
-        /// <returns>An enumerator over the colection</returns>
+        /// <returns>An enumerator over the collection</returns>
         public abstract IEnumerator<E> GetEnumerator();
 
         #endregion //////////////////////////////////////////////////////////////
@@ -104,19 +106,19 @@ namespace Vulpine.Core.Data
         #region Additional Opperations...
 
         /// <summary>
-        /// Inserts multiple items into the colleciton.
+        /// Inserts multiple items into the collection.
         /// </summary>
         /// <param name="items">Items to insert</param>
         /// <exception cref="ArgumentNullException">If a null value is 
         /// inserted into the collection</exception>
         public virtual void Add(params E[] items)
         {
-            //simply calls the add method repeatidly
+            //simply calls the add method repeatedly
             foreach (E item in items) Add(item);
         }
 
         /// <summary>
-        /// Inserts multiple items into the colleciton.
+        /// Inserts multiple items into the collection.
         /// </summary>
         /// <param name="items">Items to insert</param>
         /// <remarks>It overloads the (+) operator</remarks>
@@ -124,24 +126,24 @@ namespace Vulpine.Core.Data
         /// inserted into the collection</exception>
         public virtual void Add(IEnumerable<E> items)
         {
-            //simply calls the add method repeatidly
+            //simply calls the add method repeatedly
             foreach (E item in items) Add(item);
         }
 
         /// <summary>
-        /// Copies the elements of the colleciton into an array with a given
-        /// offset. This is implemented primarly in suport of the ICollection
+        /// Copies the elements of the collection into an array with a given
+        /// offset. This is implemented primary in support of the ICollection
         /// interface, for which it is required.
         /// </summary>
         /// <param name="array">The array in which to place the items</param>
-        /// <param name="offset">The offest index into the array</param>
+        /// <param name="offset">The offset index into the array</param>
         /// <exception cref="ArgumentNullException">If the array is null</exception>
         /// <exception cref="ArgumentOutOfRangeException">If the offset is less
         /// than zero, or dose not leave enough room for the collection to fit
         /// into the rest of the array</exception>
         public virtual void CopyTo(E[] array, int offset)
         {
-            //checks that the colleciton will fit into the array
+            //checks that the collection will fit into the array
             if (array == null) throw new ArgumentNullException("array");
             if (offset < 0 || offset > array.Length - Count)
                 throw new ArgumentOutOfRangeException("offset");
@@ -169,7 +171,7 @@ namespace Vulpine.Core.Data
         #region Operator Overlodes...
 
         /// <summary>
-        /// Calls the Add() method and returns a refrence to the same collection.
+        /// Calls the Add() method and returns a reference to the same collection.
         /// This is so that multiple insertions can be chained together.
         /// </summary>
         public static VCollection<E> operator+(VCollection<E> container, E item)
@@ -179,7 +181,7 @@ namespace Vulpine.Core.Data
         }
 
         /// <summary>
-        /// Calls the Add() method and returns a refrence to the same collection.
+        /// Calls the Add() method and returns a reference to the same collection.
         /// This is so that multiple insertions can be chained together.
         /// </summary>
         public static VCollection<E> operator+(VCollection<E> container, IEnumerable<E> items)

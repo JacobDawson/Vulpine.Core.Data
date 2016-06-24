@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+//spell-checked
+
 namespace Vulpine.Core.Data
 {
     /// <summary>
-    /// A keyed item is any generic item that has a corisponding key asociated
+    /// A keyed item is any generic item that has a corresponding key associated
     /// with it. When a keyed item is compared with another keyed item, it compares
     /// based on the keys, rather than on the items themselves. Therefore, the key
-    /// must not be null and should have a proper hash funciton defined, to avoid
-    /// unnessary hash collisions. There are no restrictions on the item itself.
-    /// This is usefull when you want to sort or refrence items based on some
+    /// must not be null and should have a proper hash function defined, to avoid
+    /// unnecessary hash collisions. There are no restrictions on the item itself.
+    /// This is useful when you want to sort or reference items based on some
     /// other factor, namely the key for that item.
     /// </summary>
     /// <typeparam name="K">The key type of the pair</typeparam>
@@ -41,8 +43,8 @@ namespace Vulpine.Core.Data
         }
 
         /// <summary>
-        /// Cronstructs a fake key, which dosent point to any item. This is
-        /// usefull in searching for a matching key inside a collection.
+        /// Constructs a fake key, which doesn't point to any item. This is
+        /// useful in searching for a matching key inside a collection.
         /// </summary>
         /// <param name="key">The fake key</param>
         /// <exception cref="ArgumentNullException">If the key is null</exception>
@@ -66,7 +68,7 @@ namespace Vulpine.Core.Data
         }
 
         /// <summary>
-        /// Determins if two keyed items are equivlent to each other
+        /// Determines if two keyed items are equivalent to each other
         /// by comparing their keys. As long as the keys match, they
         /// are considered the same item, even if the items themselves
         /// differ.
@@ -75,7 +77,7 @@ namespace Vulpine.Core.Data
         /// <returns>True if the objects are equal</returns>
         public override bool Equals(object obj)
         {
-            //makes shure the object is a keyed item
+            //makes sure the object is a keyed item
             var other = obj as KeyedItem<K, E>;
             if (other == null) return false;
 
@@ -106,7 +108,7 @@ namespace Vulpine.Core.Data
         }
 
         /// <summary>
-        /// Obtains the key refrencing the current item.
+        /// Obtains the key referencing the current item.
         /// </summary>
         public K Key
         {
@@ -130,7 +132,7 @@ namespace Vulpine.Core.Data
             //checks for a valid target
             if (other == null) return -1;
 
-            //atempts to use the default comparison method for keys
+            //attempts to use the default comparison method for keys
             var comp = key as IComparable<K>;
             if (comp != null) return comp.CompareTo(other.Key);
 

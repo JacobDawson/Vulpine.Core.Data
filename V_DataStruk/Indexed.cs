@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+//spell-checked
+
 namespace Vulpine.Core.Data
 {
     /// <summary>
-    /// Represents an indexed colleciton of items, with methods to retreve and delete
+    /// Represents an indexed collection of items, with methods to retrieve and delete
     /// items by index, as well as find the index of a given item. It differs significantly
     /// from the IList interface, in that it dose not allow for the order of the items
     /// to be changed once inserted into the list. It also allows for the use of the
-    /// Index class, as opposed to ordinary intergers. 
+    /// Index class, as opposed to ordinary integers. 
     /// </summary>
     /// <typeparam name="E">The element type of the indexed collection</typeparam>
     /// <remarks>Last Update: 2016-06-09</remarks>

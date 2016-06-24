@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+//spell-checked
+
 namespace Vulpine.Core.Data.Tables
 {
     /// <summary>
     /// This implementation of a Table uses a single array to store its items. Because
     /// each bucket can only hold one item it must use open-address hashing to resolve 
     /// collisions. If two items hash to the same index, it probes the array looking for 
-    /// the second item, using a step size computed from its hash code. This tenique is 
-    /// sometimes refered to as double hashing. The array itself must be significantly 
-    /// larger that the size of the table inorder to minimise collisions. However, the 
+    /// the second item, using a step size computed from its hash code. This technique is 
+    /// sometimes refereed to as double hashing. The array itself must be significantly 
+    /// larger that the size of the table in order to minimize collisions. However, the 
     /// actual space complexity is comparable to binary search trees. Items in the table 
-    /// can be fetched in O(1) amortised time.
+    /// can be fetched in O(1) amortized time.
     /// </summary>
     /// <typeparam name="K">Key type of the table</typeparam>
     /// <typeparam name="E">Element type of the table</typeparam>
@@ -22,18 +24,18 @@ namespace Vulpine.Core.Data.Tables
     {
         #region Class Definitions...
 
-        //the maximum load factor for optimal preformance
+        //the maximum load factor for optimal performance
         private const double MAXL = 0.75;
 
         //the step size must be less than the default base size
-        //both values must be prime for maximum effecency
+        //both values must be prime for maximum efficiency
         private const int DBS = 23;
         private const int DSS = 13;
 
         //contains the object to be used as holder places
         private static readonly object HOLD = new Object();
 
-        //defines the atributes of the hash table
+        //defines the attributes of the hash table
         private int size;
         private int counter;
 
@@ -53,7 +55,7 @@ namespace Vulpine.Core.Data.Tables
 
         /// <summary>
         /// Constructs a new table, containing multiple entries. The number of
-        /// buckets is atomaticly determined based on the number of entries.
+        /// buckets is automatically determined based on the number of entries.
         /// </summary>
         /// <param name="pairs">The entries into the table</param>
         public TableOpen(IEnumerable<KeyedItem<K, E>> pairs)
@@ -69,12 +71,12 @@ namespace Vulpine.Core.Data.Tables
 
         /// <summary>
         /// Constructs a new table, containing multiple entries. The keys
-        /// for the entries are derived from a seperate key selector funciton.
-        /// The number of buckets is automaticly determined based on the
+        /// for the entries are derived from a separate key selector function.
+        /// The number of buckets is automatically determined based on the
         /// number of entries.
         /// </summary>
         /// <param name="items">The items to be stored in the table</param>
-        /// <param name="selector">A funciton to derive the keys for each
+        /// <param name="selector">A function to derive the keys for each
         /// item that is stored in the table</param>
         public TableOpen(IEnumerable<E> items, Func<E, K> selector)
         {
@@ -105,7 +107,7 @@ namespace Vulpine.Core.Data.Tables
 
         /// <summary>
         /// Represents the internal size of the table, or how many buckets
-        /// it has avaliable to sort and store items.
+        /// it has available to sort and store items.
         /// </summary>
         public override int Buckets
         {
@@ -117,7 +119,7 @@ namespace Vulpine.Core.Data.Tables
         #region Table Implementation...
 
         /// <summary>
-        /// Determins if a paticular key is already in use in this table.
+        /// Determines if a particular key is already in use in this table.
         /// It returns true if the key exists, and false otherwise.
         /// </summary>
         /// <param name="key">Key to test</param>
@@ -129,7 +131,7 @@ namespace Vulpine.Core.Data.Tables
         }
 
         /// <summary>
-        /// Retreives a value from the table that matches the given key. If no
+        /// Retrieves a value from the table that matches the given key. If no
         /// match for the key can be found, it returns null.
         /// </summary>
         /// <param name="key">Key of the desired item</param>
@@ -139,10 +141,10 @@ namespace Vulpine.Core.Data.Tables
             //searches for the index matching the key
             int index = FindIndex(key);
 
-            //makes shure that we have found an index
+            //makes sure that we have found an index
             if (index < 0) return default(E);
 
-            //returns the value from ligitimate pairs
+            //returns the value from legitimate pairs
             var temp = table[index] as KeyedItem<K, E>;
             return (temp != null) ? temp.Item : default(E);
         }
@@ -169,7 +171,7 @@ namespace Vulpine.Core.Data.Tables
             if (size > table.Length * MAXL) 
                 ChangeSize(2 * table.Length);
 
-            //clears up holder places when nessary
+            //clears up holder places when necessary
             if (size + counter > table.Length * MAXL) 
                 ChangeSize(table.Length - 2);
 
@@ -196,7 +198,7 @@ namespace Vulpine.Core.Data.Tables
                 spot = HashIndex(spot + step);
             }
 
-            //determins if location is empty
+            //determines if location is empty
             if (posible < 0) posible = spot;
             else counter = counter - 1;
 
@@ -243,7 +245,7 @@ namespace Vulpine.Core.Data.Tables
             //checks for failed matches
             if (index < 0) return default(E);
 
-            //delets the pair and remembers it for later
+            //deletes the pair and remembers it for later
             var temp = table[index] as KeyedItem<K, E>;
             table[index] = HOLD;
 
@@ -344,12 +346,12 @@ namespace Vulpine.Core.Data.Tables
                 if (table[x] == null) continue;
                 if (table[x] == HOLD) continue;
 
-                //computes the intitial index
+                //computes the initial index
                 hash = table[x].GetHashCode();
                 spot = HashIndex(hash, temp.Length);
                 step = HashStep(hash);
 
-                //probs further if nessary
+                //probes further if necessary
                 while (temp[spot] != null)
                 spot = HashIndex(spot + step);
 
@@ -361,7 +363,7 @@ namespace Vulpine.Core.Data.Tables
         }
 
         /// <summary>
-        /// Helper method for initialising the internal array, with the desired 
+        /// Helper method for initializing the internal array, with the desired 
         /// starting capacity. The capacity must be greater than the step size 
         /// for double hashing to work.
         /// </summary>
@@ -372,7 +374,7 @@ namespace Vulpine.Core.Data.Tables
             if (cap < DBS) cap = DBS;
             cap = Prime.NextPrime(cap - 1);
 
-            //sets the initial contditions
+            //sets the initial conditions
             table = new Object[cap];
             size = counter = 0;
         }

@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+//spell-checked
+
 namespace Vulpine.Core.Data
 {
     /// <summary>
-    /// This structor represnts a given index into an index-base data structor, sutch
-    /// as a list. It exists so that we can use negative indicies to indicate postions
-    /// from the end of the data structor. Because there may be many data structors that
-    /// use sutch an indexing system, it helps to include the logic inside a single Index
-    /// structor, rather than use plane intergers. It also suports implicit conversion
-    /// from all major interger types, so there should be no difrence in functionality
+    /// This structure represents a given index into an index-base data structure, such
+    /// as a list. It exists so that we can use negative indices to indicate positions
+    /// from the end of the data structure. Because there may be many data structure that
+    /// use such an indexing system, it helps to include the logic inside a single Index
+    /// structure, rather than use plane integers. It also supports implicit conversion
+    /// from all major integer types, so there should be no difference in functionality
     /// from the user's perspective.
     /// </summary>
     /// <remarks>Last Update: 2016-05-19</remarks>
@@ -65,11 +67,11 @@ namespace Vulpine.Core.Data
         #region Index Operators...
 
         /// <summary>
-        /// Calculates the desired index, given the size of the data structor.
+        /// Calculates the desired index, given the size of the data structure.
         /// </summary>
-        /// <param name="size">Size of the sata structor</param>
-        /// <returns>The desried index, or null if the index would be
-        /// outside the ragne of the data structor</returns>
+        /// <param name="size">Size of the data structure</param>
+        /// <returns>The desired index, or null if the index would be
+        /// outside the range of the data structure</returns>
         public int? GetIndex(int size)
         {
             if (index >= size)
@@ -85,7 +87,7 @@ namespace Vulpine.Core.Data
             else if (index >= -size)
             {
                 //we infer the index to be counting backwards from
-                //the end of our indexed data structor
+                //the end of our indexed data structure
                 return (size + index);
             }
             else
@@ -97,7 +99,7 @@ namespace Vulpine.Core.Data
 
         /// <summary>
         /// Obtains the original value given, which may be negative or lie
-        /// outisde the range of the data structor.
+        /// outside the range of the data structure.
         /// </summary>
         /// <returns></returns>
         public int GetOriginal()
