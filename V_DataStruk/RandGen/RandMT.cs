@@ -35,9 +35,6 @@ namespace Vulpine.Core.Data.RandGen
         private uint[] state;
         private int index;
 
-        //remembers the initial seed
-        private int seed;
-
         /// <summary>
         /// Constructs a new PRGN using the current system time
         /// as the intinal seed value.
@@ -78,28 +75,34 @@ namespace Vulpine.Core.Data.RandGen
             Init(data);
         }
 
-        /// <summary>
-        /// Represents the 32-bit seed value used to initialise this
-        /// particular instance of Random.
-        /// </summary>
-        public override int Seed
-        {
-            get { return seed; }
-        }
-
         #endregion /////////////////////////////////////////////////////////////////
 
         #region Random Implementation...
 
         /// <summary>
-        /// Generates a psudo-random value that is between zero
-        /// and the maximum value for 32-bit integers.
+        /// Generates a psudo-random 32-bit value, that is between the
+        /// maximum and minimum values for a 32-bit interger.
         /// </summary>
         /// <returns>A psudo-random interger</returns>
         public override int NextInt()
         {
-            //enshures our output is between 0 and MaxValue
-            return Generate() & Int32.MaxValue;
+            //updates the next set of numbers
+            if (index >= N)
+            {
+                Twist();
+                index = 0;
+            }
+
+            //Goes through our Temporing Transform
+            uint y = state[index];
+            y ^= (y >> 11);
+            y ^= (y << 7) & B;
+            y ^= (y << 15) & C;
+            y ^= (y >> 18);
+
+            //Updates and returns
+            index = index + 1;
+            return unchecked((int)y);
         }
 
         /// <summary>
@@ -109,9 +112,22 @@ namespace Vulpine.Core.Data.RandGen
         /// <returns>A psudo-random double</returns>
         public override double NextDouble()
         {
+            //grabs 32-bits stored as a long
+            long next = unchecked((uint)NextInt());
+
             //builds a double in the interval [1, 2) then shifts to [0, 1)
-            long bits = ((long)NextInt() << 21) | (0x3FFL << 52);
+            long bits = (next << 20) | (0x3FFL << 52);
             return BitConverter.Int64BitsToDouble(bits) - 1.0;
+        }
+
+        /// <summary>
+        /// Resets the random number generator to the state that it was
+        /// in when it was first initialised with its seed.
+        /// </summary>
+        public override void Reset()
+        {
+            //reinitianises the RNG
+            Init(seed);
         }
 
         #endregion /////////////////////////////////////////////////////////////////
@@ -165,32 +181,6 @@ namespace Vulpine.Core.Data.RandGen
                     state[i] = 1812433253U * state[i] + (uint)i;
                 }
             }
-        }
-
-        /// <summary>
-        /// Generates the next 32-bit vector in the sequence, after 
-        /// applying a temporing transformation.
-        /// </summary>
-        /// <returns>Next 32-bit vector</returns>
-        private int Generate()
-        {
-            //updates the next set of numbers
-            if (index >= N)
-            {
-                Twist();
-                index = 0;
-            }
-
-            //Goes through our Temporing Transform
-            uint y = state[index];
-            y ^= (y >> 11);
-            y ^= (y << 7) & B;
-            y ^= (y << 15) & C;
-            y ^= (y >> 18);
-
-            //Updates and returns
-            index = index + 1;
-            return unchecked((int)y);
         }
 
         /// <summary>

@@ -11,10 +11,15 @@ namespace RandTests
     {
         public static int Get32bits(this VRandom rng)
         {
-            int x1 = rng.NextInt();
-            int x2 = rng.NextInt();
+            ////extracts a 32-bit value from a 31-bit rng
+            //int x1 = rng.NextInt();
+            //int x2 = rng.NextInt();
 
-            return (x1 << 1) | (x2 & 1);
+            //return (x1 << 1) | (x2 & 1);
+
+
+            //all RNGs are now 32 bits
+            return rng.NextInt();
         }
     }
 }

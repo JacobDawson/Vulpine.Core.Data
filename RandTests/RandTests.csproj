@@ -52,6 +52,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="RandFile.cs" />
+    <Compile Include="RandSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Ideas.txt" />

@@ -45,6 +45,7 @@ namespace RandTests
             Console.WriteLine("   3) System.Random");
             Console.WriteLine("   4) XOR-Shift Register");
             Console.WriteLine("   5) Rule 30");
+            Console.WriteLine("   6) Prime Numbers");
 
             bool pass = false;
             int select = -1;
@@ -54,7 +55,7 @@ namespace RandTests
                 string s = Console.ReadLine();
                 pass = Int32.TryParse(s, out select);
 
-                if (select < 1 | select > 5) pass = false;
+                if (select < 1 | select > 6) pass = false;
             }
 
             switch (select)
@@ -69,6 +70,8 @@ namespace RandTests
                     return new RandXOR(SEED);
                 case 5:
                     return new RandR30(SEED);
+                case 6:
+                    return new RandFile("primes3.rng");
                 default:
                     throw new Exception();
             }            
@@ -106,16 +109,16 @@ namespace RandTests
                     ListIntergers(rng, 100000);
                     break;
                 case 3:
-                    GenerateFile(rng, 15);
+                    GenerateFile(rng, 10);
                     break;
                 case 4:
                     GenerateImage(rng);
                     break;
                 case 5:
-                    TestUniform(rng, 20, 10000000);
+                    TestUniform(rng, 20, 1000000);
                     break;
                 case 6:
-                    RollDice(rng, 10000000);
+                    RollDice(rng, 1000000);
                     break;
                 default:
                     throw new Exception();
@@ -317,7 +320,7 @@ namespace RandTests
 
             for (int i = 0; i < rolls; i++)
             {
-                int x = rng.RollSum(3, 6);
+                int x = rng.RollDice(3, 6, 0);
                 count[x - 3] += 1;
             }
 

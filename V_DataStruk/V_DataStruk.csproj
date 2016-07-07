@@ -73,7 +73,6 @@
     <Compile Include="RandGen\RandLCG.cs" />
     <Compile Include="RandGen\RandMT.cs" />
     <Compile Include="RandGen\RandR30.cs" />
-    <Compile Include="RandGen\RandSystem.cs" />
     <Compile Include="RandGen\RandXOR.cs" />
     <Compile Include="RandGen\VRandom.cs" />
     <Compile Include="Tables\Table.cs" />

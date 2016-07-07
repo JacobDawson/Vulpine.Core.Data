@@ -17,15 +17,12 @@ namespace Vulpine.Core.Data.RandGen
     {
         #region Class Definitions...
 
-        //the paramaters that define the PRGN
-        private const int M = 2147483647;
-        private const int A = 48271;
-        private const int Q = M / A;
-        private const int R = M % A;
+        //the paramaters that define the PRNG
+        private const long A = 25214903917L;
+        private const long C = 11L;
         
         //stores the state of the PRGN
-        private int state;
-        private int seed;
+        private ulong state;
 
         /// <summary>
         /// Constructs a new PRGN using the current system time
@@ -34,8 +31,8 @@ namespace Vulpine.Core.Data.RandGen
         public RandLCG()
         {
             int time = (int)(DateTime.Now.Ticks % Int32.MaxValue);
+            this.state = unchecked((ulong)time);
             this.seed = time;
-            this.state = time;
         }
 
         /// <summary>
@@ -44,17 +41,8 @@ namespace Vulpine.Core.Data.RandGen
         /// <param name="seed">The initial seed</param>
         public RandLCG(int seed)
         {
+            this.state = unchecked((ulong)seed);
             this.seed = seed;
-            this.state = seed & Int32.MaxValue;
-        }
-
-        /// <summary>
-        /// Represents the 32-bit seed value used to initialise this
-        /// particular instance of Random.
-        /// </summary>
-        public override int Seed
-        {
-            get { return seed; }
         }
 
         #endregion ///////////////////////////////////////////////////////////////
@@ -70,11 +58,9 @@ namespace Vulpine.Core.Data.RandGen
         {
             unchecked
             {
-                state = A * (state % Q) - R * (state / Q);
-                if (state <= 0) state += M;
+                state = (A * state + C) & 0xFFFFFFFFFFFF;
+                return (int)(state >> 16);
             }
-
-            return state;
         }
 
         /// <summary>
@@ -84,9 +70,22 @@ namespace Vulpine.Core.Data.RandGen
         /// <returns>A psudo-random double</returns>
         public override double NextDouble()
         {
+            //grabs 32-bits stored as a long
+            long next = unchecked((uint)NextInt());
+
             //builds a double in the interval [1, 2) then shifts to [0, 1)
-            long bits = ((long)NextInt() << 21) | (0x3FFL << 52);
+            long bits = (next << 20) | (0x3FFL << 52);
             return BitConverter.Int64BitsToDouble(bits) - 1.0;
+        }
+
+        /// <summary>
+        /// Resets the random number generator to the state that it was
+        /// in when it was first initialised with its seed.
+        /// </summary>
+        public override void Reset()
+        {
+            //reinitianises the RNG
+            state = unchecked((ulong)seed);
         }
 
         #endregion ///////////////////////////////////////////////////////////////

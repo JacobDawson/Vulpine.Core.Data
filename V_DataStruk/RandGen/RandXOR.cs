@@ -20,9 +20,6 @@ namespace Vulpine.Core.Data.RandGen
         //stores the internal state of the XOR-Shift register
         private uint x, y, z, w;
 
-        //remembers the initial seed
-        private int seed;
-
         /// <summary>
         /// Constructs a new PRGN using the current system time
         /// as the intinal seed value.
@@ -44,28 +41,28 @@ namespace Vulpine.Core.Data.RandGen
             Init(seed);
         }
 
-        /// <summary>
-        /// Represents the 32-bit seed value used to initialise this
-        /// particular instance of Random.
-        /// </summary>
-        public override int Seed
-        {
-            get { return seed; }
-        }
-
         #endregion /////////////////////////////////////////////////////////////////
 
         #region Random Implementation...
 
         /// <summary>
-        /// Generates a psudo-random value that is between zero
-        /// and the maximum value for 32-bit integers.
+        /// Generates a psudo-random 32-bit value, that is between the
+        /// maximum and minimum values for a 32-bit interger.
         /// </summary>
         /// <returns>A psudo-random interger</returns>
         public override int NextInt()
         {
-            //enshures our output is between 0 and MaxValue
-            return Generate() & Int32.MaxValue;
+            uint temp = x ^ (x << 11);
+            temp = temp ^ (temp >> 8);
+
+            x = y;
+            y = z;
+            z = w;
+
+            w = w ^ (w >> 19);
+            w = w ^ temp;
+
+            return unchecked((int)w);
         }
 
         /// <summary>
@@ -75,9 +72,22 @@ namespace Vulpine.Core.Data.RandGen
         /// <returns>A psudo-random double</returns>
         public override double NextDouble()
         {
+            //grabs 32-bits stored as a long
+            long next = unchecked((uint)NextInt());
+
             //builds a double in the interval [1, 2) then shifts to [0, 1)
-            long bits = ((long)NextInt() << 21) | (0x3FFL << 52);
+            long bits = (next << 20) | (0x3FFL << 52);
             return BitConverter.Int64BitsToDouble(bits) - 1.0;
+        }
+
+        /// <summary>
+        /// Resets the random number generator to the state that it was
+        /// in when it was first initialised with its seed.
+        /// </summary>
+        public override void Reset()
+        {
+            //reinitianises the RNG
+            Init(seed);
         }
 
         #endregion /////////////////////////////////////////////////////////////////
@@ -96,25 +106,6 @@ namespace Vulpine.Core.Data.RandGen
             y = x ^ 0x9FA7B2E7U;
             z = x ^ 0x51DF156EU;
             w = x ^ 0x10702939U;
-        }
-
-        /// <summary>
-        /// Generates a random 32-bit interger.
-        /// </summary>
-        /// <returns>A psudo-random int</returns>
-        private int Generate()
-        {
-            uint temp = x ^ (x << 11);
-            temp = temp ^ (temp >> 8);
-
-            x = y;
-            y = z;
-            z = w;
-
-            w = w ^ (w >> 19);
-            w = w ^ temp;
-
-            return unchecked((int)w);
         }
 
         #endregion /////////////////////////////////////////////////////////////////
