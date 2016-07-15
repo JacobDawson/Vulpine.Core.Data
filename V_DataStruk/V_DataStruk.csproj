@@ -70,11 +70,6 @@
     <Compile Include="Queues\Deque.cs" />
     <Compile Include="Queues\DequeArray.cs" />
     <Compile Include="Queues\DequeLinked.cs" />
-    <Compile Include="RandGen\RandLCG.cs" />
-    <Compile Include="RandGen\RandMT.cs" />
-    <Compile Include="RandGen\RandR30.cs" />
-    <Compile Include="RandGen\RandXOR.cs" />
-    <Compile Include="RandGen\VRandom.cs" />
     <Compile Include="Tables\Table.cs" />
     <Compile Include="Tables\TableClosed.cs" />
     <Compile Include="Tables\TableOpen.cs" />

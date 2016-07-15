@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUnit_Unofficial", "..\NUni
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data_Viewer", "Data_Viewer\Data_Viewer.csproj", "{C29318C6-2EA9-4BFE-BE64-2E1F7D7B0EFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RandTests", "RandTests\RandTests.csproj", "{DC9C85AE-9C8A-457C-96AC-BF16FA769532}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrimeRunner", "PrimeRunner\PrimeRunner.csproj", "{25A88FFB-2DCA-4837-86B2-A579C9E99C76}"
 EndProject
 Global
@@ -63,16 +61,6 @@ Global
 		{C29318C6-2EA9-4BFE-BE64-2E1F7D7B0EFB}.Release|Mixed Platforms.Build.0 = Release|x86
 		{C29318C6-2EA9-4BFE-BE64-2E1F7D7B0EFB}.Release|x86.ActiveCfg = Release|x86
 		{C29318C6-2EA9-4BFE-BE64-2E1F7D7B0EFB}.Release|x86.Build.0 = Release|x86
-		{DC9C85AE-9C8A-457C-96AC-BF16FA769532}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{DC9C85AE-9C8A-457C-96AC-BF16FA769532}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{DC9C85AE-9C8A-457C-96AC-BF16FA769532}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{DC9C85AE-9C8A-457C-96AC-BF16FA769532}.Debug|x86.ActiveCfg = Debug|x86
-		{DC9C85AE-9C8A-457C-96AC-BF16FA769532}.Debug|x86.Build.0 = Debug|x86
-		{DC9C85AE-9C8A-457C-96AC-BF16FA769532}.Release|Any CPU.ActiveCfg = Release|x86
-		{DC9C85AE-9C8A-457C-96AC-BF16FA769532}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{DC9C85AE-9C8A-457C-96AC-BF16FA769532}.Release|Mixed Platforms.Build.0 = Release|x86
-		{DC9C85AE-9C8A-457C-96AC-BF16FA769532}.Release|x86.ActiveCfg = Release|x86
-		{DC9C85AE-9C8A-457C-96AC-BF16FA769532}.Release|x86.Build.0 = Release|x86
 		{25A88FFB-2DCA-4837-86B2-A579C9E99C76}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{25A88FFB-2DCA-4837-86B2-A579C9E99C76}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{25A88FFB-2DCA-4837-86B2-A579C9E99C76}.Debug|Mixed Platforms.Build.0 = Debug|x86
