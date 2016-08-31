@@ -37,15 +37,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArrayBased.cs" />
-    <Compile Include="Cloneable.cs" />
     <Compile Include="Collection.cs" />
     <Compile Include="Exceptions\ArgRangeExcp.cs" />
     <Compile Include="Exceptions\DataException.cs" />
-    <Compile Include="Exceptions\DuplicateValExcp.cs" />
-    <Compile Include="Exceptions\EmptySetExcp.cs" />
-    <Compile Include="Exceptions\ItemNotFoundExcp.cs" />
-    <Compile Include="Exceptions\ReadOnlyExcp.cs" />
-    <Compile Include="Exceptions\UnreachableExcp.cs" />
     <Compile Include="Extentions\VEnumerable.cs" />
     <Compile Include="Grid.cs" />
     <Compile Include="Heeps\Heep.cs" />

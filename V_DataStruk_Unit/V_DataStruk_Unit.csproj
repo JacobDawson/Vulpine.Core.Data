@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Unit\DataSets.cs" />
     <Compile Include="Unit\Dictionaries\DictionaryTests.cs" />
     <Compile Include="Unit\Dictionaries\HeepArrayTests.cs" />
     <Compile Include="Unit\Dictionaries\HeepTests.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Unit\Collections\DequeArrayTests.cs" />
     <Compile Include="Unit\Collections\DequeLinkedTests.cs" />
     <Compile Include="Unit\Collections\DequeTests.cs" />
+    <Compile Include="Unit\Others\ExtentionTests.cs" />
     <Compile Include="Unit\Others\IndexTests.cs" />
     <Compile Include="Unit\Collections\ListArrayTests.cs" />
     <Compile Include="Unit\Collections\ListLinkedTests.cs" />

@@ -23,7 +23,7 @@ namespace Vulpine.Core.Data
     /// </summary>
     /// <typeparam name="E">The element type of the collection</typeparam>
     /// <remarks>Last Update: 2016-06-14</remarks>
-    public abstract class VCollection<E> : ICollection<E>,  IDisposable
+    public abstract class VCollection<E> : ICollection<E>, IDisposable
     {
         #region Default Properties...
 
