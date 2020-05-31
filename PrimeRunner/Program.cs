@@ -10,6 +10,9 @@ namespace PrimeRunner
 {
     class Program
     {
+        //NOTE: This note is just a test to see if I can still
+        //make commits to the GIT repository
+
         static void Main(string[] args)
         {
             //GenPrimes1(1000);
